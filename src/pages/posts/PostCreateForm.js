@@ -92,13 +92,13 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Arist</Form.Label>
         <Form.Control
-          as="textarea"
+          type="text"
           name="artist"
           value={artist}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.artist?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -107,13 +107,13 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Song</Form.Label>
         <Form.Control
-          as="textarea"
+          type="text"
           name="song"
           value={song}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.song?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -122,13 +122,13 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Link</Form.Label>
         <Form.Control
-          as="textarea"
+          type="text"
           name="link"
           value={link}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.link?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -137,13 +137,13 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Moods</Form.Label>
         <Form.Control
-          as="textarea"
+          type="text"
           name="moods"
           value={moods}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.moods?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
