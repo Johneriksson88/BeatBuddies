@@ -31,7 +31,7 @@ function PostCreateForm() {
     content: "",
     image: "",
   });
-  const { title, artist, song, link, moods, content, image } = postData;
+  const { title, artist, song, link, content, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -58,6 +58,9 @@ function PostCreateForm() {
     const formData = new FormData();
 
     formData.append("title", title);
+    formData.append("artist", artist);
+    formData.append("song", song);
+    formData.append("link", link);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
 
@@ -90,7 +93,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Arist</Form.Label>
+        <Form.Label>Artist</Form.Label>
         <Form.Control
           type="text"
           name="artist"
@@ -129,21 +132,6 @@ function PostCreateForm() {
         />
       </Form.Group>
       {errors?.link?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      <Form.Group>
-        <Form.Label>Moods</Form.Label>
-        <Form.Control
-          type="text"
-          name="moods"
-          value={moods}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.moods?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

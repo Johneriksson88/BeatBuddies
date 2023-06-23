@@ -16,6 +16,9 @@ const Post = (props) => {
     likes_count,
     like_id,
     title,
+    artist,
+    song,
+    link,
     content,
     image,
     updated_at,
@@ -57,7 +60,7 @@ const Post = (props) => {
       console.log(err);
     }
   };
-
+  console.log(title)
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -71,6 +74,9 @@ const Post = (props) => {
             {is_owner && postPage && "..."}
           </div>
         </Media>
+        <Card.Title>
+          <a href={link} target="_blank" rel="noreferrer">{artist} - {song}</a>
+        </Card.Title>
       </Card.Body>
       <Link to={`/posts/${id}`}>
         <Card.Img src={image} alt={title} />
