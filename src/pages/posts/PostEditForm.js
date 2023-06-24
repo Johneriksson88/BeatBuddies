@@ -108,6 +108,48 @@ function PostEditForm() {
             ))}
 
             <Form.Group>
+                <Form.Label>Artist</Form.Label>
+                <Form.Control
+                    type="text"
+                    name="artist"
+                    value={artist}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+            {errors?.title?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
+            <Form.Group>
+                <Form.Label>Song</Form.Label>
+                <Form.Control
+                    type="text"
+                    name="song"
+                    value={song}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+            {errors?.title?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
+            <Form.Group>
+                <Form.Label>Link</Form.Label>
+                <Form.Control
+                    type="text"
+                    name="link"
+                    value={link}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+            {errors?.title?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
+            <Form.Group>
                 <Form.Label>Content</Form.Label>
                 <Form.Control
                     as="textarea"
