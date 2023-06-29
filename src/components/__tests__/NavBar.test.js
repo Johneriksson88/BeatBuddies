@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import render from "@testing-library/react";
+import screen from "@testing-library/react";
+import fireEvent from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
+import CurrentUserProvider from "../../contexts/CurrentUserContext";
 import NavBar from "../NavBar";
 
 test("renders NavBar", () => {
