@@ -15,6 +15,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
+import MoodsPage from "./pages/moods/MoodsPage"
 
 function App() {
   const currentUser = useCurrentUser();
@@ -49,6 +50,15 @@ function App() {
               <PostsPage
                 message="No results found. Adjust the search keyword or like a post."
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/moods"
+            render={() => (
+              <MoodsPage
+                message="No results found. Adjust the search keyword"
               />
             )}
           />

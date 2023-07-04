@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import logo from "../assets/logo.png";
 import cardiogram from "../assets/cardiogram.png"
 import styles from "../styles/NavBar.module.css";
 import NavLink from "react-router-dom/NavLink";
@@ -35,9 +34,10 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/posts/create"
     >
-      <i className="far fa-plus-square"></i>Add post
+      <i className="far fa-plus-square"></i>New post
     </NavLink>
   );
+
   const loggedInIcons = (
     <>
       <NavLink
@@ -53,6 +53,13 @@ const NavBar = () => {
         to="/liked"
       >
         <i className="fas fa-heart"></i>Liked
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/moods"
+      >
+        <i class="fa-sharp fa-solid fa-masks-theater"></i>Moods
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
@@ -94,9 +101,9 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={cardiogram} alt="logo" height="70" className="d-inline"/>
+            <img src={cardiogram} alt="logo" height="70" className="d-inline" />
             <h2 className={`d-none d-sm-inline ${styles.BrandName}`}><b>B</b>eat<b>B</b>uddies</h2>
-            
+
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
