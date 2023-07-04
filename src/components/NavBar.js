@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import logo from "../assets/logo.png";
+import cardiogram from "../assets/cardiogram.png"
 import styles from "../styles/NavBar.module.css";
 import NavLink from "react-router-dom/NavLink";
 import {
@@ -93,7 +94,9 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+            <img src={cardiogram} alt="logo" height="70" className="d-inline"/>
+            <h2 className={`d-none d-sm-inline ${styles.BrandName}`}><b>B</b>eat<b>B</b>uddies</h2>
+            
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
@@ -102,8 +105,8 @@ const NavBar = () => {
           onClick={() => setExpanded(!expanded)}
           aria-controls="basic-navbar-nav"
         />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto text-left">
+        <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+          <Nav>
             <NavLink
               exact
               className={styles.NavLink}

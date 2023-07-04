@@ -100,7 +100,7 @@ const Post = (props) => {
         </Card.Title>
       </Card.Body>
       <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} width="50%"/>
+        <Card.Img src={image} alt={title} className={styles.cardImage}/>
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
