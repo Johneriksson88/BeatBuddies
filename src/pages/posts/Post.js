@@ -7,8 +7,9 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import { Container } from "react-bootstrap";
 
 const Post = (props) => {
   const {
@@ -25,14 +26,27 @@ const Post = (props) => {
     link,
     content,
     image,
+    moods,
     updated_at,
     postPage,
     setPosts,
+    setMoods,
   } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+/* 
+  const fetchMoods = async () => {
+    try {
+      const { data } = await axiosReq.get(`/moods/?${filter}search=${query}`);
+      setPosts(data);
+      setHasLoaded(true);
+    } catch (err) {
+      //console.log(err);
+    }
+  }; */
+
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -77,6 +91,8 @@ const Post = (props) => {
       //console.log(err);
     }
   };
+
+  console.log("bajs", moods)
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -100,11 +116,21 @@ const Post = (props) => {
         </Card.Title>
       </Card.Body>
       <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} className={styles.cardImage}/>
+        <Card.Img src={image} alt={title} className={styles.cardImage} />
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+
+
+        Moods:
+        {moods}
+        {moods.map((mood) => (
+          <Card.Text key={mood.name}>
+          </Card.Text>
+        ))}
+
+
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger
