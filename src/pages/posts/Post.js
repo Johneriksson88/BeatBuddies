@@ -36,17 +36,6 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
-/* 
-  const fetchMoods = async () => {
-    try {
-      const { data } = await axiosReq.get(`/moods/?${filter}search=${query}`);
-      setPosts(data);
-      setHasLoaded(true);
-    } catch (err) {
-      //console.log(err);
-    }
-  }; */
-
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -92,7 +81,6 @@ const Post = (props) => {
     }
   };
 
-  console.log("bajs", moods)
   return (
     <Card className={styles.Post}>
       <Card.Body>

@@ -16,6 +16,7 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
 import MoodsPage from "./pages/moods/MoodsPage"
+import MoodPage from "./pages/moods/MoodPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -62,6 +63,7 @@ function App() {
               />
             )}
           />
+          <Route exact path="/moods/:id" render={() => <MoodPage />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />

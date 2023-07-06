@@ -1,5 +1,6 @@
 import React, { useEffect, useState, } from 'react'
 import { axiosReq } from "../../api/axiosDefaults";
+import { Badge, Card, Col, ListGroup, Row } from 'react-bootstrap';
 function MoodsPage() {
     const [moods, setMoods] = useState([]);
 
@@ -13,14 +14,21 @@ function MoodsPage() {
             }
         };
         fetchMoods();
-    },[])
-    
+    }, [])
+
     return (
-        <div>
-            {moods.map((mood, i) => (
-                <p key={i} >{mood.name}</p>
-            ))}
-        </div>
+        <Row>
+            <Card style={{ width: '18rem' }}>
+
+                {moods.map((mood, i) => (
+                    <h1>
+                        <Badge key={i} bg="primary">{mood.name}</Badge>
+                    </h1>
+
+                ))}
+            </Card>
+
+        </Row>
 
     )
 }
