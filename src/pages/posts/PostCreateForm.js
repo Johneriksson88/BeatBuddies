@@ -33,7 +33,7 @@ function PostCreateForm() {
     content: "",
     image: "",
   });
-  const { title, artist, song, link, content, image } = postData;
+  const { title, artist, song, link, moods, content, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -63,6 +63,7 @@ function PostCreateForm() {
     formData.append("artist", artist);
     formData.append("song", song);
     formData.append("link", link);
+    formData.append("moods", moods);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
 

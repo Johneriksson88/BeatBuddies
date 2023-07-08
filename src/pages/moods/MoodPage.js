@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { axiosReq } from '../../api/axiosDefaults';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import MoodsPage from './MoodsPage';
 import { Card } from 'react-bootstrap';
+import MoodsPage from './MoodsPage';
 
 function MoodPage() {
     const { id } = useParams();
-
-    const [mood, setMood] = useState([]);
-
+    const [mood, setMood] = useState({});
     useEffect(() => {
         const fetchMood = async () => {
             try {
-                const { data } = await axiosReq.get(`/moods/${id}`);
-                setMood(data);
+                const response = await axiosReq.get(`/moods/${id}`)
+                console.log(response)
+
+                setMood(response.data);
+                console.log(response)
             } catch (err) {
                 //console.log(err);
             }
         };
+        
         fetchMood();
-        /* const posts = mood.posts;
-        console.log("posts: ", {posts}) */
-    }, [id, mood, setMood])
+        console.log("mood: ", mood)
+    }, [id]);
+
     return (
         <div>
-            <Card>
-                <Card.Title>{mood.name}</Card.Title>
-                {/* {mood.posts.map((post, i) => (
-                    <Card.Text key={i}>{post.title}</Card.Text>
-                ))} */}
-                
-            </Card>
+            <h1>{mood.name}</h1>
+            {mood.posts?.map((post) => (
+                <p key={post.id}>{`${post.artist} - ${post.song}`}</p>
+            ))}
         </div>
 
     )

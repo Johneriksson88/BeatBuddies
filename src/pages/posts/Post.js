@@ -7,9 +7,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
-import { Container } from "react-bootstrap";
 
 const Post = (props) => {
   const {
@@ -30,7 +29,6 @@ const Post = (props) => {
     updated_at,
     postPage,
     setPosts,
-    setMoods,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -113,10 +111,7 @@ const Post = (props) => {
 
         Moods:
         {moods}
-        {moods.map((mood) => (
-          <Card.Text key={mood.name}>
-          </Card.Text>
-        ))}
+        
 
 
         <div className={styles.PostBar}>

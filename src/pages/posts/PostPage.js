@@ -19,7 +19,7 @@ import { fetchMoreData } from "../../utils/utils";
 
 function PostPage() {
   const { id } = useParams();
-  const [post, setPost] = useState({ results: [] });
+  const [post, setPost] = useState([{ results: [] }]);
 
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
