@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -20,32 +20,12 @@ import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 
-import AsyncCreatableSelect from 'react-select/async-creatable';
+import MoodSelectForm from "../moods/MoodSelectForm";
 
 function PostCreateForm() {
   useRedirect('loggedOut');
   const [errors, setErrors] = useState({});
   const [moodOptions, setMoodOptions] = useState([])
-
-
-
-  useEffect(() => {
-    const fetchMoodOptions = async () => {
-      try {
-        const { data } = await axiosReq.get("/moods/")
-        const moods = []
-        data.map((mood) => {
-          moods.push(mood.name)
-        })
-
-        setMoodOptions(moods)
-
-      } catch (err) {
-        //console.log(err);
-      }
-    }
-    fetchMoodOptions();
-  }, []);
 
   const [postData, setPostData] = useState({
     title: "",
@@ -150,11 +130,7 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Moods</Form.Label>
-        <AsyncCreatableSelect
-          cacheOptions
-          defaultOptions
-          loadOptions={moodOptions}
-        />
+        <MoodSelectForm />
       </Form.Group>
       {errors?.moods?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
