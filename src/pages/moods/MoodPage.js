@@ -24,7 +24,6 @@ function MoodPage() {
     };
 
     fetchMood();
-    console.log("mood: ", mood);
   }, [id]);
 
   return (

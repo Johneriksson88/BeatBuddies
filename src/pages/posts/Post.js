@@ -46,7 +46,6 @@ const Post = (props) => {
         );
         setMoodsObj(moodResults.map((response) => response.data));
         setHasLoadedMoods(true);
-        console.log("catch moods", moodsObj);
       } catch (err) {
         //console.log(err);
       }
@@ -54,7 +53,6 @@ const Post = (props) => {
     fetchPosts();
   }, [id]);
 
-  console.log("moodsobj", moodsObj);
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };

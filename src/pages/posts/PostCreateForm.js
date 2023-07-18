@@ -30,13 +30,11 @@ function PostCreateForm() {
     const fetchMoods = async () => {
       try {
         const { data } = await axiosReq.get("/moods/");
-        console.log("data: ", data);
         const moodNames = data.map((mood) => ({
           label: mood.name,
           value: mood.id,
         }));
         setMoodOptions(moodNames);
-        console.log("mood options: ", moodOptions);
       } catch (err) {
         //console.log(err);
       }
@@ -45,14 +43,11 @@ function PostCreateForm() {
   }, []);
 
   const handleSelectedMoods = (event) => {
-    // console.log("handle selected moods:", event);
     const chosenMoods = event?.map((mood) => mood.value);
     setPostData({
       ...postData,
       moods: chosenMoods,
     });
-    console.log("chosen moods:", chosenMoods);
-    console.log("post data: ", postData);
   };
   const [postData, setPostData] = useState({
     title: "",
