@@ -35,8 +35,7 @@ const Post = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
   const [moodsObj, setMoodsObj] = useState([]);
-  const [hasLoadedMoods, setHasLoadedMoods] = useState(false);
-  console.log(moods);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,7 +44,7 @@ const Post = (props) => {
           moods.map((mood) => axiosReq.get(`/moods/${mood}`))
         );
         setMoodsObj(moodResults.map((response) => response.data));
-        setHasLoadedMoods(true);
+        setHasLoaded(true);
       } catch (err) {
         //console.log(err);
       }
@@ -128,7 +127,7 @@ const Post = (props) => {
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
         <Card.Body>
-          {hasLoadedMoods ? (
+          {hasLoaded ? (
             <>
               {moodsObj.map((mood) => (
                 <p key={mood} className={styles.moodTag}>

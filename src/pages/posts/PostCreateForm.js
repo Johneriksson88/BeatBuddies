@@ -70,13 +70,6 @@ function PostCreateForm() {
     });
   };
 
-  /* const handleSelectMoods = (event) => {
-    setPostData({
-      ...postData,
-
-    })
-  }; */
-
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);

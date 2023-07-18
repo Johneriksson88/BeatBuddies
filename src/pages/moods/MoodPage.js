@@ -29,8 +29,7 @@ function MoodPage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <h1>{mood.name}</h1>
-        <h2>Posts</h2>
+        <h2>{mood.name}</h2>
         {hasLoaded ? (
           <Col>
             {posts.map((post) => (

@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import cardiogram from "../assets/cardiogram.png"
+import cardiogram from "../assets/cardiogram.png";
 import styles from "../styles/NavBar.module.css";
 import NavLink from "react-router-dom/NavLink";
 import {
@@ -102,8 +102,9 @@ const NavBar = () => {
         <NavLink to="/">
           <Navbar.Brand>
             <img src={cardiogram} alt="logo" height="70" className="d-inline" />
-            <h2 className={`d-none d-sm-inline ${styles.BrandName}`}><b>B</b>eat<b>B</b>uddies</h2>
-
+            <h2 className={`d-none d-sm-inline ${styles.BrandName}`}>
+              <b>B</b>eat<b>B</b>uddies
+            </h2>
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
