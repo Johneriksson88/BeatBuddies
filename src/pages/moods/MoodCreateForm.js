@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useRedirect } from "../../hooks/useRedirect";
-import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Row,
+} from "react-bootstrap";
 
 import styles from "../../styles/MoodCreateForm.module.css";
 import appStyles from "../../App.module.css";
@@ -9,7 +17,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function MoodCreateForm() {
-  //useRedirect("loggedOut");
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     name: "",
@@ -28,6 +36,7 @@ function MoodCreateForm() {
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
+        console.log("errors:", errors);
       }
     }
   };
@@ -54,13 +63,25 @@ function MoodCreateForm() {
                 onChange={handleChange}
                 className={styles.textBox}
               />
+              {errors?.name?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
             </Form.Group>
+
             <FormGroup>
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.Blue}`}
+                onClick={() => history.goBack()}
+              >
+                Cancel
+              </Button>
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Warning}`}
                 type="submit"
               >
-                create
+                Create
               </Button>
             </FormGroup>
           </Col>
