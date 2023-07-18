@@ -26,3 +26,18 @@ h5 {
 .cardImage {
   width: 50%;
 }
+
+.moodTag {
+  display: inline;
+  background-color: blue;
+  border-radius: 6px;
+  width: fit-content;
+  block-size: fit-content;
+  margin: 0px 1px 0px 1px;
+  padding: 4px;
+  color: #e6e2e2;
+}
+
+.moodContainer {
+  align-items: center;
+}

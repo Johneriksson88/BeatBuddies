@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
@@ -7,8 +7,9 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import Asset from "../../components/Asset";
 
 const Post = (props) => {
   const {
@@ -30,11 +31,30 @@ const Post = (props) => {
     postPage,
     setPosts,
   } = props;
-
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+  const [moodsObj, setMoodsObj] = useState([]);
+  const [hasLoadedMoods, setHasLoadedMoods] = useState(false);
+  console.log(moods);
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const moodResults = await Promise.all(
+          moods.map((mood) => axiosReq.get(`/moods/${mood}`))
+        );
+        setMoodsObj(moodResults.map((response) => response.data));
+        setHasLoadedMoods(true);
+        console.log("catch moods", moodsObj);
+      } catch (err) {
+        //console.log(err);
+      }
+    };
+    fetchPosts();
+  }, [id]);
+
+  console.log("moodsobj", moodsObj);
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
@@ -98,7 +118,9 @@ const Post = (props) => {
           </div>
         </Media>
         <Card.Title>
-          <a href={link} target="_blank" rel="noreferrer">{artist} - {song}</a>
+          <a href={link} target="_blank" rel="noreferrer">
+            {artist} - {song}
+          </a>
         </Card.Title>
       </Card.Body>
       <Link to={`/posts/${id}`}>
@@ -107,12 +129,19 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
-
-
-        Moods:
-        {moods}
-        
-
+        <Card.Body>
+          {hasLoadedMoods ? (
+            <>
+              {moodsObj.map((mood) => (
+                <p key={mood} className={styles.moodTag}>
+                  {mood.name}
+                </p>
+              ))}
+            </>
+          ) : (
+            <Asset spinner />
+          )}
+        </Card.Body>
 
         <div className={styles.PostBar}>
           {is_owner ? (

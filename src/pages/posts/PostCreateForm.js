@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -19,14 +19,41 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
-
-import MoodSelectForm from "../moods/MoodSelectForm";
+import Select from "react-select";
 
 function PostCreateForm() {
-  useRedirect('loggedOut');
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
-  const [moodOptions, setMoodOptions] = useState([])
+  const [moodOptions, setMoodOptions] = useState([]);
 
+  useEffect(() => {
+    const fetchMoods = async () => {
+      try {
+        const { data } = await axiosReq.get("/moods/");
+        console.log("data: ", data);
+        const moodNames = data.map((mood) => ({
+          label: mood.name,
+          value: mood.id,
+        }));
+        setMoodOptions(moodNames);
+        console.log("mood options: ", moodOptions);
+      } catch (err) {
+        //console.log(err);
+      }
+    };
+    fetchMoods();
+  }, []);
+
+  const handleSelectedMoods = (event) => {
+    // console.log("handle selected moods:", event);
+    const chosenMoods = event?.map((mood) => mood.value);
+    setPostData({
+      ...postData,
+      moods: chosenMoods,
+    });
+    console.log("chosen moods:", chosenMoods);
+    console.log("post data: ", postData);
+  };
   const [postData, setPostData] = useState({
     title: "",
     artist: "",
@@ -48,6 +75,13 @@ function PostCreateForm() {
     });
   };
 
+  /* const handleSelectMoods = (event) => {
+    setPostData({
+      ...postData,
+
+    })
+  }; */
+
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -66,7 +100,7 @@ function PostCreateForm() {
     formData.append("artist", artist);
     formData.append("song", song);
     formData.append("link", link);
-    formData.append("moods", moods);
+    moods.forEach((mood) => formData.append("moods", mood));
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
 
@@ -130,7 +164,13 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Moods</Form.Label>
-        <MoodSelectForm />
+        {postData && <p>{postData.moods}</p>}
+        <Select
+          isMulti
+          options={moodOptions}
+          placeholder="Select one or more moods"
+          onChange={handleSelectedMoods}
+        />
       </Form.Group>
       {errors?.moods?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -227,7 +267,6 @@ function PostCreateForm() {
                 {message}
               </Alert>
             ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
