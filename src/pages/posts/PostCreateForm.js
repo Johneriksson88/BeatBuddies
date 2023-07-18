@@ -25,6 +25,7 @@ function PostCreateForm() {
   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [moodOptions, setMoodOptions] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const fetchMoods = async () => {
@@ -35,6 +36,7 @@ function PostCreateForm() {
           value: mood.id,
         }));
         setMoodOptions(moodNames);
+        setHasLoaded(true);
       } catch (err) {
         //console.log(err);
       }
@@ -106,7 +108,7 @@ function PostCreateForm() {
   const textFields = (
     <div className="text-center">
       <Form.Group>
-        <Form.Label>Title</Form.Label>
+        <Form.Label className={styles.label}>Title</Form.Label>
         <Form.Control
           type="text"
           name="title"
@@ -121,7 +123,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Artist</Form.Label>
+        <Form.Label className={styles.label}>Artist</Form.Label>
         <Form.Control
           type="text"
           name="artist"
@@ -136,7 +138,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Song</Form.Label>
+        <Form.Label className={styles.label}>Song</Form.Label>
         <Form.Control
           type="text"
           name="song"
@@ -151,14 +153,19 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Moods</Form.Label>
-        {postData && <p>{postData.moods}</p>}
-        <Select
-          isMulti
-          options={moodOptions}
-          placeholder="Select one or more moods"
-          onChange={handleSelectedMoods}
-        />
+        <Form.Label className={styles.label}>Moods</Form.Label>
+        {hasLoaded ? (
+          <>
+            <Select
+              isMulti
+              options={moodOptions}
+              placeholder="Select one or more moods"
+              onChange={handleSelectedMoods}
+            />
+          </>
+        ) : (
+          <Asset spinner />
+        )}
       </Form.Group>
       {errors?.moods?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -167,7 +174,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Link</Form.Label>
+        <Form.Label className={styles.label}>Link</Form.Label>
         <Form.Control
           type="text"
           name="link"
@@ -182,7 +189,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Content</Form.Label>
+        <Form.Label className={styles.label}>Content</Form.Label>
         <Form.Control
           as="textarea"
           rows={6}

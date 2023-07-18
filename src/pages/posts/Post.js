@@ -50,7 +50,7 @@ const Post = (props) => {
       }
     };
     fetchPosts();
-  }, [id]);
+  }, [id, moods]);
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);

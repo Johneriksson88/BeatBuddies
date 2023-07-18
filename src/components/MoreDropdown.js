@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
-import useHistory from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -54,7 +54,7 @@ export const ProfileEditDropdown = ({ id }) => {
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >
-          <i className="fas fa-edit" /> Edit profile
+          <i className="fas fa-edit" /> edit profile
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
@@ -68,7 +68,7 @@ export const ProfileEditDropdown = ({ id }) => {
           aria-label="edit-password"
         >
           <i className="fas fa-key" />
-          Change password
+          change password
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

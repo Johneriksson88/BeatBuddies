@@ -24,30 +24,35 @@ function MoodsPage() {
   }, []);
 
   return (
-      <Row className="h-100">
-        <Col className="py-2 p-0 p-lg-2 d-inline" lg={8}>
-          {hasLoaded ? (
-            <>
-              {moods.map((mood) => (
-                <Link to={`/moods/${mood.id}`}>
-                  <Button size="lg" className="m-2" key={mood.id}>
-                    {mood.name}
-                  </Button>
-                </Link>
-              ))}
-            </>
-          ) : (
-            <Asset spinner />
-          )}
-        </Col>
-        <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <Link to={"/createmood"}>
-            <Button variant="warning">
-              <i className={`far fa-plus-square ${styles.plus}`}></i>New mood
-            </Button>
-          </Link>
-        </Col>
+    <Row className="h-100">
+      <Row className="d-lg-none text-center mb-3 mt-5">
+        <Button variant="warning">
+          <i className={`far fa-plus-square ${styles.plus}`}></i>New mood
+        </Button>
       </Row>
+      <Col className="py-2 p-0 p-lg-2 d-inline" lg={8}>
+        {hasLoaded ? (
+          <>
+            {moods.map((mood) => (
+              <Link to={`/moods/${mood.id}`}>
+                <Button size="lg" className="m-2" key={mood.id}>
+                  {mood.name}
+                </Button>
+              </Link>
+            ))}
+          </>
+        ) : (
+          <Asset spinner />
+        )}
+      </Col>
+      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+        <Link to={"/createmood"}>
+          <Button variant="warning">
+            <i className={`far fa-plus-square ${styles.plus}`}></i>New mood
+          </Button>
+        </Link>
+      </Col>
+    </Row>
   );
 }
 
