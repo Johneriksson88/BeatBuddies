@@ -84,6 +84,11 @@ function PostCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Custom validation of moods
+    if (moods.length === 0) {
+      setErrors({ moods: "Pick one or more moods." });
+      return;
+    }
     const formData = new FormData();
 
     formData.append("title", title);
@@ -93,7 +98,6 @@ function PostCreateForm() {
     moods.forEach((mood) => formData.append("moods", mood));
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
@@ -167,11 +171,7 @@ function PostCreateForm() {
           <Asset spinner />
         )}
       </Form.Group>
-      {errors?.moods?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+      {errors.moods ? <Alert variant="warning">{errors.moods}</Alert> : <></>}
 
       <Form.Group>
         <Form.Label className={styles.label}>Link</Form.Label>
