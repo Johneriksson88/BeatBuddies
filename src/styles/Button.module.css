@@ -8,6 +8,7 @@
   margin-right: 2px;
   min-width: 75px;
   margin-top: 6px;
+  background-color: #f2c2cf;
 }
 
 .Button:hover {
@@ -42,24 +43,18 @@
 
 .BlueOutline,
 .Blue:hover {
-  /* border: 1px solid #2142b2; */
   background-color: #ffffff;
   color: #2142b2;
 }
 
 .Black,
 .BlackOutline:hover {
-  /* background-color: #242a3d;
-    color: white; */
   background-color: #242a3d;
   color: aliceblue;
 }
 
 .Black:hover,
 .BlackOutline {
-  /* background-color: #dadadf;
-    color: #242a3d;
-    border-color: #242a3d; */
   background-color: aliceblue;
   color: #242a3d;
 }
@@ -67,4 +62,16 @@
 .Bright {
   background-color: #2ed9ff;
   color: #2142b2;
+}
+
+.MoodButton {
+  background-color: #d46488;
+  color: black;
+  margin: 5px;
+  border: none;
+}
+
+.MoodButton:hover {
+  background-color: #a63a61;
+  color: white;
 }

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Asset from "../../components/Asset";
 import styles from "../../styles/MoodsPage.module.css";
 import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
 
 function MoodsPage() {
   const [moods, setMoods] = useState([]);
@@ -38,7 +39,11 @@ function MoodsPage() {
               <>
                 {moods.map((mood) => (
                   <Link to={`/moods/${mood.id}`}>
-                    <Button size="lg" className="m-2" key={mood.id}>
+                    <Button
+                      size="lg"
+                      className={btnStyles.MoodButton}
+                      key={mood.id}
+                    >
                       {mood.name}
                     </Button>
                   </Link>
@@ -51,10 +56,7 @@ function MoodsPage() {
         </Container>
       </Col>
 
-      <Col
-        lg={4}
-        className="d-none d-lg-block p-0 p-lg-2 text-center"
-      >
+      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2 text-center">
         <Link to={"/createmood"}>
           <Button variant="warning">
             <i className={`far fa-plus-square ${styles.plus}`}></i>New mood

@@ -29,13 +29,13 @@ h5 {
 
 .moodTag {
   display: inline;
-  background-color: blue;
+  background-color: #a63a61;
   border-radius: 6px;
   width: fit-content;
   block-size: fit-content;
   margin: 0px 1px 0px 1px;
   padding: 4px;
-  color: #e6e2e2;
+  color: white;
 }
 
 .moodContainer {
