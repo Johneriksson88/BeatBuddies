@@ -1,12 +1,14 @@
 # BeatBuddies
 
-![BeatBuddies - Am I Responsive Image](docs/readme_images/am_i_responsive.png)
+![BeatBuddies - Am I Responsive Image](src/assets/readme_images/am_i_responsive.png)
 
 BeatBuddies in an app for sharing music tips with your friends. You can make posts containing a song, image, content and "moods" of your choice. Moods can be whatever the user wants, and are tags for each post that communicates what mood/feeling/genre/general vibe the song has. Posts can be liked and commented so the users can share their feelings, and the users can follow each other to get a custom feed.
 
 The project is a part of the [Code Institute Full Stack Developer Program](https://codeinstitute.net/se/full-stack-software-development-diploma/) and is my fifth and last "portfolio project", with a specialization on advanced front end.
 
 The main goal of the project was to create a front end and a back end part and then successfully connect the two.
+
+<u>Links</u>
 
 The live deployed app: https://beatbuddies.herokuapp.com/
 
@@ -15,10 +17,6 @@ The front end repository: https://github.com/Johneriksson88/BeatBuddies
 The live deployed API: https://beatbuddies-api-a72df4dfc93e.herokuapp.com/ (looks best with a browser Json formatter)
 
 The back end repository: https://github.com/Johneriksson88/bb-api
-
-## Table of Contents
-
-# BeatBuddies
 
 ## Table of Contents
 
@@ -399,6 +397,8 @@ Although there is a folder called "components" in the src directory, these are n
 
 ## Forms
 
+All forms are validated via the back-end, except for the select box in the post create form.
+
 ### Create post
 
 - Clicking on the "New post" button in the navigation takes the user to the create post form.
@@ -485,82 +485,112 @@ This section covers all technology components and choices.
 - [DB Designer](https://www.dbdesigner.net/)
   - to create the database schema.
 - [ElephantSQL](https://www.elephantsql.com/)
-  - database hosting.
+  - database hosting. -[Am i responsive?](https://ui.dev/amiresponsive)
+  - image of app on different screen sizes
 
 #
 
 ## Deployment
 
-### Deployment to heroku
+### Front end
 
-**In your terminal**
+These steps were followed to deploy the front end React app:
 
-1. Add the list of requirements by running the command "pip3 freeze --local > requirements.txt"
-2. Git add and git commit the changes made
+1. Login or Sign up to Heroku
+2. Create new app
+3. Name accordingly
+4. Go into app and find the deploy tab
+5. Link to Github under deployment method
+6. Search for your repo in Github and link
+7. Scroll down and hit deploy
+8. Open app and confirm you can view the app
 
-**Log into heroku**
+### Back end
 
-3. Log into [Heroku](https://dashboard.heroku.com/apps) or create a new account and log in
-4. In the top right-hand corner click "New" and choose the option Create new app, if you are a new user, the "Create new app" button will appear in the middle of the screen
-5. Write app name - it has to be unique
-6. Choose Region
-7. Click "Create App"
+These steps were followed to deploy the back end Django REST API:
 
-**The page of your project opens**
+<u>In the project</u>
 
-8. **IMPORTANT** - Make sure all secret keys and passwords are kept in an env.py file in your root directory. Put the reference to env.py in the gitignore file as to not accidentally share it with others.
-   Access the variables by using e.g.:
+1. Install gunicorn and django-cors-headers in the terminal:
+   ```
+   pip3 install gunicorn django-cors-headers
+   ```
+2. Update the requirements.txt-file:
+   ```
+   pip freeze --local > requirements.txt
+   ```
+3. Create a Procfile in the root directory and add these commands:
+   ```
+   release: python manage.py makemigrations && python manage.py migrate
+   web: gunicorn drf_api.wsgi
+   ```
+4. Add the "ALLOWED_HOSTS" variable in settings.py:
+   ```
+   ALLOWED_HOSTS = ['localhost', '<your_app_name>.herokuapp.com']
+   ```
+5. Add corsheaders to INSTALLED_APPS:
 
-```
-os.environ.get('SECRET_KEY')
-```
+   ```
+   INSTALLED_APPS = [
+   ...
+   'dj_rest_auth.registration',
+   'corsheaders',
+   ...
+   ]
+   ```
 
-9. Click "Settings" from the menu on the top of the page
+6. Add corsheaders middleware to the TOP of the MIDDLEWARE:
+   ```
+     MIDDLEWARE = [
+     'corsheaders.middleware.CorsMiddleware',
+     ...
+       ]
+   ```
+7. Under the MIDDLEWARE list, set the ALLOWED_ORIGINS for the network requests made to the server:
+   ```
+   if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+   else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
+   ```
+8. Enable sending cookies in cross-origin requests so that users can get authentication functionality:
 
-10. Go to section "Config Vars" and click button "Reveal Config Vars".
+   ```
+   else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
 
-11. Add the below variables to the list
+   CORS_ALLOW_CREDENTIALS = True
+   ```
 
-    - DATABASE_URL as provided by ElephantSQL
-    - SECRET_KEY is the django secret key and can be generated [here](https://miniwebtool.com/django-secret-key-generator/).
-    - Cloudinary URL can be obtained from [cloudinary](https://cloudinary.com/). Follow the steps on the website to register.
+9. To be able to have the front end app and the API deployed to different platforms, set the JWT_AUTH_SAMESITE attribute to 'None'. Without this the cookies would be blocked:
+   ```
+   JWT_AUTH_COOKIE = 'my-app-auth'
+   JWT_AUTH_REFRESH_COOKE = 'my-refresh-token'
+   JWT_AUTH_SAMESITE = 'None'
+   ```
+10. Again, make sure the requirements.txt-file is up to date:
+    ```
+    pip freeze --local > requirements.txt
+    ```
 
-**Go back to your code**
+<u>In Heroku</u>
 
-12. Procfile needs to be created in your app and contain:
-
-```
-web: gunicorn PROJECT_NAME.wsgi
-```
-
-13. In settings in your base app add the Heroku URL to ALLOWED_HOSTS
-
-14. Add and commit the changes in your code and push to github
-
-**Final step - deployment**
-
-15. Next go to "Deploy" in the menu bar on the top
-
-16. Go to section "deployment method", choose "GitHub"
-
-17. New section will appear "Connect to GitHub" - Search for the repository to connect to
-
-18. Type the name of your repository and click "search"
-
-19. Once Heroku finds your repository - click "connect"
-
-20. Scroll down to the section "Automatic Deploys"
-
-21. Click "Enable automatic deploys" or choose "Deploy branch" and manually deploy
-
-22. Click "Deploy branch"
-
-Once the program runs you should see the message "the app was sussesfully deployed".
-
-### Deployment problems
-
-Initially deploying served some problems. A big one was that my static files didn't load. This is because i didn't have initial serving of the static files.
-After double checking my code against [this](https://dev.to/successhycenth/uploading-images-to-cloudinary-storage-from-a-django-drf-application-c40) guide I got it to work.
+1. Follow steps as presented in the deployment of the [front end](#front-end) above, up to step 5
+2. Add all necessary config vars:
+   ```
+   SECRET_KEY = [your-django-secret-key]
+   CLOUDINARY_URL = [your-cloudinary-url]
+   DATABASE_URL = [your-database-url]
+   DISABLE_COLLECTSTATIC = 1
+   ALLOWED_HOST = [your-deployed-api-url]
+   CLIENT_ORIGIN = [your-deployed-front-end-url]
+   ```
 
 #
 
