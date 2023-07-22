@@ -6,38 +6,81 @@ BeatBuddies in an app for sharing music tips with your friends. You can make pos
 
 The project is a part of the [Code Institute Full Stack Developer Program](https://codeinstitute.net/se/full-stack-software-development-diploma/) and is my fifth and last "portfolio project", with a specialization on advanced front end.
 
-The website can be [found here](https://beatbuddies.herokuapp.com/).
+The main goal of the project was to create a front end and a back end part and then successfully connect the two.
+
+The live deployed app: https://beatbuddies.herokuapp.com/
+
+The front end repository: https://github.com/Johneriksson88/BeatBuddies
+
+The live deployed API: https://beatbuddies-api-a72df4dfc93e.herokuapp.com/ (looks best with a browser Json formatter)
+
+The back end repository: https://github.com/Johneriksson88/bb-api
 
 ## Table of Contents
 
+# BeatBuddies
+
+## Table of Contents
+
+- [BeatBuddies](#beatbuddies)
 - [UX and UI](#ux-and-ui)
   - [Site Owner Goals](#site-owner-goals)
   - [User Stories](#user-stories)
   - [Wireframes](#wireframes)
 - [Design](#design)
-  - [Imagery](#imagery) -[Logo](#logo) -[Hero image](#hero-image) -[Why us section](#why-us-section)
+  - [Imagery](#imagery)
+    - [Logo](#logo)
+    - [Icons](#icons)
   - [Colours](#colours)
   - [Fonts](#fonts)
   - [Favicon](#favicon)
+- [Database Models](#database-models)
 - [Features](#features)
-  - [Header](#header)
-  - [Carousel](#carousel)
-  - [All Sections](#all-sections)
-  - [About Section](#about-section)
-  - [Media Section](#media-section)
-  - [Events Section](#events-section)
-  - [Contact Section](#contact-section)
-  - [Footer](#footer)
+  - [Navigation](#navigation)
+  - [Home page](#home-page)
+  - [Feed page](#feed-page)
+  - [Liked page](#liked-page)
+  - [Post page](#post-page)
+  - [Moods page](#moods-page)
+  - [Mood page](#mood-page)
+  - [Sign out](#sign-out)
+  - [Profile page](#profile-page)
+- [Components](#components)
+  - [Asset](#asset)
+  - [Avatar](#avatar)
+  - [MoreDropDown](#moredropdown)
+  - [NavBar](#navbar)
+  - [NotFound](#notfound)
+  - [Comment](#comment)
+  - [Post](#post)
+  - [Profile](#profile)
+  - [PopularProfiles](#popularprofiles)
+- [Forms](#forms)
+  - [Create post](#create-post)
+  - [Sign up](#sign-up)
+  - [Sign in](#sign-in)
+  - [Create mood](#create-mood)
+- [Features Left to Implement](#features-left-to-implement)
+- [Technology](#technology)
+  - [Programming languages](#programming-languages)
+  - [Frameworks](#frameworks)
+  - [Libraries](#libraries)
+  - [Web services](#web-services)
 - [Deployment](#deployment)
+  - [Deployment problems](#deployment-problems)
 - [Testing](#testing)
-  - [Validator Testing](#validator-testing)
-  - [Manual Testing](#validator-testing)
-  - [Bugs](#bugs)
+  - [HTML and CSS](#html-and-css)
+  - [HTML Validator Problems](#html-validator-problems)
+  - [JavaScript](#javascript)
+  - [Python](#python)
+  - [Manual Testing](#manual-testing)
+  - [Lighthouse Testing](#lighthouse-testing)
+- [Bugs](#bugs)
 - [Credits](#credits)
-  - [Languages](#languages)
-  - [Frameworks, Libraries and Tools](#frameworks-libraries-and-tools)
-  - [Images](#images)
+  - [Images & Icons](#images--icons)
   - [Content](#content)
+  - [Honorable mentions](#honorable-mentions)
+- [My thoughts](#my-thoughts)
 
 #
 
@@ -64,73 +107,73 @@ Agile development practices such as user stories were managed by using GitHub's 
 The GitHub project can be found [here](https://github.com/users/Johneriksson88/projects/6).
 The Issues page can be found [here](https://github.com/Johneriksson88/BeatBuddies/issues).
 
-[1] **Navigation** - As a user I can view a navbar from every page so that I can navigate easily between pages.
+1. **Navigation** - As a user I can view a navbar from every page so that I can navigate easily between pages.
 
-[2] **Routing** - As a user I can navigate through pages quickly so that I can view content seamlessly without page refresh.
+2. **Routing** - As a user I can navigate through pages quickly so that I can view content seamlessly without page refresh.
 
-[3] **Authentication - Sign up** - As a user I can create a new account so that I can access all the features for signed up users.
+3. **Authentication - Sign up** - As a user I can create a new account so that I can access all the features for signed up users.
 
-[4] **Authentication - Sign in** - As a user I can sign in to the app so that I can access functionality for logged in users.
+4. **Authentication - Sign in** - As a user I can sign in to the app so that I can access functionality for logged in users.
 
-[5] **Authentication - Logged in Status** - As a user I can tell if I am logged in or not so that I can log in if I need to.
+5. **Authentication - Logged in Status** - As a user I can tell if I am logged in or not so that I can log in if I need to.
 
-[6] **Authentication - Refreshing access tokens** - As a user I can maintain my logged-in status until I choose to log out so that my user experience is not compromised.
+6. **Authentication - Refreshing access tokens** - As a user I can maintain my logged-in status until I choose to log out so that my user experience is not compromised.
 
-[7] **Navigation: Conditional rendering** - As a logged out user I can see sign in and sign up options so that I can sign in/sign up.
+7. **Navigation: Conditional rendering** - As a logged out user I can see sign in and sign up options so that I can sign in/sign up.
 
-[8] **Avatar** - As a user I can view user's avatars so that I can easily identify users of the application.
+8. **Avatar** - As a user I can view user's avatars so that I can easily identify users of the application.
 
-[9] **Create posts** - As a logged in user I can create posts so that I can share my images with the world.
+9. **Create posts** - As a logged in user I can create posts so that I can share my images with the world.
 
-[10] **View a post** - As a user I can view the details of a single post so that I can learn more about it.
+10. **View a post** - As a user I can view the details of a single post so that I can learn more about it.
 
-[11] **Like a post** - As a logged in user I can like a post so that I can show my support for the posts that interest me.
+11. **Like a post** - As a logged in user I can like a post so that I can show my support for the posts that interest me.
 
-[12] **View most recent posts** - As a user I can view all the most recent posts, ordered by most recently created first so that I am up to date with the newest content.
+12. **View most recent posts** - As a user I can view all the most recent posts, ordered by most recently created first so that I am up to date with the newest content.
 
-[13] **Search posts** - As a user, I can search for posts with keywords, so that I can find the posts and user profiles I am most interested in.
+13. **Search posts** - As a user, I can search for posts with keywords, so that I can find the posts and user profiles I am most interested in.
 
-[14] **View liked posts** - As a logged in user I can view the posts I liked so that I can find the posts I enjoy the most.
+14. **View liked posts** - As a logged in user I can view the posts I liked so that I can find the posts I enjoy the most.
 
-[15] **View posts of followed users** - As a logged in user I can view content filtered by users I follow so that I can keep up to date with what they are posting about.
+15. **View posts of followed users** - As a logged in user I can view content filtered by users I follow so that I can keep up to date with what they are posting about.
 
-[16] **Infinite scroll** - As a user I can keep scrolling through the posts on the site, that are loaded for me automatically so that I don't have to click on "next page" etc.
+16. **Infinite scroll** - As a user I can keep scrolling through the posts on the site, that are loaded for me automatically so that I don't have to click on "next page" etc.
 
-[17] **Post page** - As a user I can view the posts page so that I can read the comments about the post.
+17. **Post page** - As a user I can view the posts page so that I can read the comments about the post.
 
-[18] **Edit post** - As a post owner I can edit my post title and description so that I can make corrections or update my post after it was created.
+18. **Edit post** - As a post owner I can edit my post title and description so that I can make corrections or update my post after it was created.
 
-[19] **Create a comment** - As a logged in user I can add comments to a post so that I can share my thoughts about the post.
+19. **Create a comment** - As a logged in user I can add comments to a post so that I can share my thoughts about the post.
 
-[20] **Comment date** - As a user I can see how long ago a comment was made so that I know how old a comment is.
+20. **Comment date** - As a user I can see how long ago a comment was made so that I know how old a comment is.
 
-[21] **View comments** - As a user I can read comments on posts so that I can read what other users think about the posts.
+21. **View comments** - As a user I can read comments on posts so that I can read what other users think about the posts.
 
-[22] **Delete comments** - As an owner of a comment I can delete my comment so that I can control removal of my comment from the application.
+22. **Delete comments** - As an owner of a comment I can delete my comment so that I can control removal of my comment from the application.
 
-[23] **Edit a comment** - As an owner of a comment I can edit my comment so that I can fix or update my existing comment.
+23. **Edit a comment** - As an owner of a comment I can edit my comment so that I can fix or update my existing comment.
 
-[24] **Profile page** - As a user I can view other users profiles so that I can see their posts and learn more about them.
+24. **Profile page** - As a user I can view other users profiles so that I can see their posts and learn more about them.
 
-[25] **Most followed profiles** - As a user I can see a list of the most followed profiles so that I can see which profiles are popular.
+25. **Most followed profiles** - As a user I can see a list of the most followed profiles so that I can see which profiles are popular.
 
 [26] **User profile** - As a user I can view statistics about a specific user: bio, number of posts, follows and users followed so that I can learn more about them.
 
-[27] **Follow/Unfollow a user** - As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed.
+27. **Follow/Unfollow a user** - As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed.
 
-[28] **View all posts by a specific user** - As a user I can view all the posts by a specific user so that I can catch up on their latest posts, or decide I want to follow them.
+28. **View all posts by a specific user** - As a user I can view all the posts by a specific user so that I can catch up on their latest posts, or decide I want to follow them.
 
-[29] **Edit profile** - As a logged in user I can edit my profile so that I can change my profile picture and bio.
+29. **Edit profile** - As a logged in user I can edit my profile so that I can change my profile picture and bio.
 
-[30] **Update username and password** - As a logged in user I can update my username and password so that I can change my display name and keep my profile secure.
+30. **Update username and password** - As a logged in user I can update my username and password so that I can change my display name and keep my profile secure.
 
-[31] **Create moods** - As a user I can create new moods so that I can connect my posts to my own moods.
+31. **Create moods** - As a user I can create new moods so that I can connect my posts to my own moods.
 
-[32] **Connect moods to a post** - As a user I can assign moods to my posts so that I can connect my posts to feelings.
+32. **Connect moods to a post** - As a user I can assign moods to my posts so that I can connect my posts to feelings.
 
-[33] **View moods** - As a user I can view all moods so that I can see what moods are available.
+33. **View moods** - As a user I can view all moods so that I can see what moods are available.
 
-[34] **View specific mood** - As a user I can view an individual mood so that I can see what posts are related to that mood.
+34. **View specific mood** - As a user I can view an individual mood so that I can see what posts are related to that mood.
 
 #
 
@@ -185,13 +228,13 @@ The brand name in the logo has the font [Raleway](https://fonts.google.com/speci
 
 From the [about page](https://fonts.google.com/specimen/Raleway/about) of Raleway:
 
->Raleway is an elegant sans-serif typeface family. Initially designed by Matt McInerney as a single thin weight, it was expanded into a 9 weight family by Pablo Impallari and Rodrigo Fuenzalida in 2012 and iKerned by Igino Marini. A thorough review and italic was added in 2016.
+> Raleway is an elegant sans-serif typeface family. Initially designed by Matt McInerney as a single thin weight, it was expanded into a 9 weight family by Pablo Impallari and Rodrigo Fuenzalida in 2012 and iKerned by Igino Marini. A thorough review and italic was added in 2016.
 >
->It is a display face and the download features both old style and lining numerals, standard and discretionary ligatures, a pretty complete set of diacritics, as well as a stylistic alternate inspired by more geometric sans-serif typefaces than its neo-grotesque inspired default character set.
+> It is a display face and the download features both old style and lining numerals, standard and discretionary ligatures, a pretty complete set of diacritics, as well as a stylistic alternate inspired by more geometric sans-serif typefaces than its neo-grotesque inspired default character set.
 >
->It also has a sister family, Raleway Dots.
+> It also has a sister family, Raleway Dots.
 >
->More information can be found at theleagueofmoveabletype.com and impallari.com
+> More information can be found at theleagueofmoveabletype.com and impallari.com
 
 #
 
@@ -205,6 +248,7 @@ The favicon is the same icon as in the logo, only a smaller size.
 
 ## Database Models
 
+For the backend part of BeatBuddies I used the [Django REST framework](https://www.django-rest-framework.org/). I first created the models, and then the serializers and views.
 The database schema were planned out in [dbdesigner.net](https://www.dbdesigner.net/). DBDesigner is an intuitive browser-based tool to create database schemas.
 
 All models and their respective fields can be seen below:
@@ -238,7 +282,6 @@ The Comments model holds all the comments displayed under the individual posts o
 ### Followers model
 
 The followers model holds all the links between the users following each other. This was the model that was the hardest for me to get my head around. Basically, the owner field holds the user following another user, and the followed field holds the user that is being followed. Both through one-to-one fields.
-
 
 ## Features
 
@@ -278,7 +321,6 @@ The logo is described [here](#logo).
 
 - Just as above, but the liked page only shows posts from users that the logged in user has liked.
 
-
 ### Post page
 
 - The post page shows an individual post, while adding the comment field below it.
@@ -293,14 +335,13 @@ The logo is described [here](#logo).
 - The mood page shows an individual mood, the number of posts it is related to in a header.
 - Underneith the header the posts related to the mood are shown.
 
-
 ### Sign out
 
 - The sign out link in the navigation directly signs out the user and redirects them to the home page.
 
 ### Profile page
 
-- The profile page has a header containing the users name, profile picture, number of posts, number of followers and the number of users the profile owner is following. 
+- The profile page has a header containing the users name, profile picture, number of posts, number of followers and the number of users the profile owner is following.
 - To the right of the username are a "three dots" icon, that shows a menu for editing profile, changing username and changing password.
 - Under the header the posts of the profile owner are shown.
 
@@ -318,7 +359,7 @@ Although there is a folder called "components" in the src directory, these are n
 
 ### Avatar
 
-- The Avatar component is used everywhere a profile picture is shown, for example along with the usernames in the PopularProfiles component. 
+- The Avatar component is used everywhere a profile picture is shown, for example along with the usernames in the PopularProfiles component.
 
 - The image size can be passed as a prop, making it usable in all formats.
 
@@ -344,7 +385,7 @@ Although there is a folder called "components" in the src directory, these are n
 - It uses the bootstrap component Card to nicely organize and display the information.
 - On the top part are the posters username, date of the creation of the post and the songs artist and song name, separated by a dash ("-"). The combined artist and song names are displayed in a link that points to the "link" field in the [Posts model](#posts-model).
 - In the middle the image for the post is shown.
-- Underneith the image are the post title, content, moods and buttons for commenting and liking. 
+- Underneith the image are the post title, content, moods and buttons for commenting and liking.
 - Clicking on the image takes the user to the individual post page where they can comment.
 
 ### Profile
@@ -367,7 +408,7 @@ Although there is a folder called "components" in the src directory, these are n
 
 ### Sign up
 
-- The sign up form takes a username, password and confirm password. 
+- The sign up form takes a username, password and confirm password.
 - It can be reached from the navigation when no user is logged in.
 
 ### Sign in
@@ -424,7 +465,8 @@ This section covers all technology components and choices.
 
 - [Axios 0.21.4](https://axios-http.com/docs/intro)
   - to communicate with the API.
-
+- [React-Select 5.7.3](https://react-select.com/home)
+  - mood select box in post create form
 
 ### Web services
 
@@ -435,7 +477,7 @@ This section covers all technology components and choices.
 - [Code Institute GitPod Full Template](https://github.com/Code-Institute-Org/gitpod-full-template)
   - the template i started my project with.
 - [Cloudinary](https://cloudinary.com/)
-  - a cloud storage service that i used for and image storage.
+  - a cloud storage service that i used for image storage.
 - [Heroku](https://heroku.com/)
   - for deployment and hosting.
 - [Visily](https://www.visily.ai/)
