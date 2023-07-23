@@ -155,7 +155,7 @@ The Issues page can be found [here](https://github.com/Johneriksson88/BeatBuddie
 
 25. **Most followed profiles** - As a user I can see a list of the most followed profiles so that I can see which profiles are popular.
 
-[26] **User profile** - As a user I can view statistics about a specific user: bio, number of posts, follows and users followed so that I can learn more about them.
+26. **User profile** - As a user I can view statistics about a specific user: bio, number of posts, follows and users followed so that I can learn more about them.
 
 27. **Follow/Unfollow a user** - As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed.
 
@@ -180,13 +180,28 @@ The Issues page can be found [here](https://github.com/Johneriksson88/BeatBuddie
 The wireframes were created using [visily.com](https://app.visily.ai/)
 
 I created wireframes for the pages that differs the most. For example, the different feed pages (home, feed and liked), as well as the sign in and sign up pages, essentially looked the same and hence didn't need separate wireframes.
-The goal of the wireframes was to get an idea of the layout of the different pages and party of the content (navlink items etc.).
+The goal of the wireframes was to get an idea of the layout of the different pages and partly of the content (navlink items etc.).
 
-![Wireframe]()
+### Home page
+
+![Home page wireframe](src/assets/readme_images/beatbuddies_home_page.png)
+
+### Moods page
+
+![Moods page wireframe](src/assets/readme_images/beatbuddies_moods_page.png)
+
+### Mood page
+
+![Mood page wireframe](src/assets/readme_images/beatbuddies_mood_page.png)
+
+### Profile page
+
+![Profile page wireframe](src/assets/readme_images/beatbuddies_profile_page.png)
+
+### Sign in page
+![Sign in page wireframe](src/assets/readme_images/beatbuddies_sign_in.png)
 
 ## Design
-
-#
 
 ## Imagery
 
@@ -206,6 +221,8 @@ The like and comment buttons for the posts are solely represented by icons, this
 
 The colour scheme of the app is very simple. I didn't want any vibrant backround colors to take away from the posts, which are the main content of the app. So I chose a white backround for the navigation and a slightly off white for the backround of the main container, to have it a bit separated from the navigation.
 There are some elements of pink (logo, buttons, active effects and mood tags on posts) to get some colour into the app as a whole, to make it a bit more interesting for the eye. The pink is the brand colour of BeatBuddies so using pink here and there reinforces the brand.
+
+To pick matching and accessible colors i used the
 
 #
 
@@ -487,8 +504,12 @@ This section covers all technology components and choices.
 - [DB Designer](https://www.dbdesigner.net/)
   - to create the database schema.
 - [ElephantSQL](https://www.elephantsql.com/)
-  - database hosting. -[Am i responsive?](https://ui.dev/amiresponsive)
+  - database hosting. 
+- [Am i responsive?](https://ui.dev/amiresponsive)
   - image of app on different screen sizes
+- [Venngage](https://venngage.com/)
+  - accessible color palette
+
 
 #
 
@@ -602,7 +623,7 @@ These steps were followed to deploy the back end Django REST API:
 
 ### Code validation
 
-The font end code (JSX, Javascript) has been validated through production via the eslint-react plugin and formatted by the prettier extention. All errors and warnings has been adressed as they came.
+The font end code (JSX, Javascript) has been validated through production via the eslint-react plugin and formatted by the prettier extention. All errors and warnings were adressed as they came.
 
 The back end code (Python) has been validated in the same way as the front end above, but with the autopep8 plugin for Python.
 
