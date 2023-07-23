@@ -633,125 +633,117 @@ The [W3C CSS Validator Service] was used to validate the project's custom CSS fi
 
 | File | Result |
 |---|---|
-| [Asset.module.css](https://raw.githubusercontent.com/llancruzz/hogwarts/main/docs/asset-css.png) | PASS :white_check_mark: |
-### **HTML Validator Problems**
+| Asset.module.css | PASS :white_check_mark: |
+| Button.module.css| PASS :white_check_mark: |
+| Comment.module.css | PASS :white_check_mark: |
+| CommentCreateEditForm.module.css | PASS :white_check_mark: |
+| MoodCreateForm.module.css | PASS :white_check_mark: |
+| MoodsPage.module.css | PASS :white_check_mark: |
+| MoreDropdown.module.css | PASS :white_check_mark: |
+| NavBar.module.css | PASS :white_check_mark: |
+| NotFound.module.css | PASS :white_check_mark: |
+| Post.module.css | PASS :white_check_mark: |
+| PostCreateEditForm.module.css | PASS :white_check_mark: |
+| PostsPage.module.css | PASS :white_check_mark: |
+| Profile.module.css | PASS :white_check_mark: |
+| ProfilePage.module.css | PASS :white_check_mark: |
+| ProfilePicture.module.css | PASS :white_check_mark: |
+| SignInUpForm.module.css | PASS :white_check_mark: |
 
-In using the "Validate by URI" function in the HTML validator, I found that the validator was throwing errors related to the jinja templating language mixed with the HTML (for example for and if statements as "{% if x == y %}"). The solution i found was to open the page in a browser, righ click anywhere on the page and press "Check page source", and copying the output HTML directly from there and put it in the "Validate by Direct Input" function. This way i get the fully rendered HTML without the jinja template tags and the validation threw no errors.
-
-### **JavaScript**
-
-The script.js-file was tested in the [jshint](https://jshint.com/) tester without any errors or warnings.
-
-### **Python**
-
-All python-files were tested for syntax errors in the [Python syntax checker](https://extendsclass.com/python-tester.html).
-
-I got only one error which was in views.py:
-
-```
-Syntax errors detected :
-
-Line 196:
-messages.success(request, f"Order #{order_id} successfully deleted.")
-^
-SyntaxError: invalid syntax
-```
-
-Asking friends and fellow students there was no apparent error with the code (note that the debugger does not throw this error) and as it works as intended i left the code as it was.
-
-#
 
 ## **Manual Testing**
 
-The site was tested manually across a range of devices to ensure all links and styling work correctly and to ensure responsiveness across a range of devices. All features on the page were tested, especially the form validation, to ensure user feedback worked properly and no faulty inputs could be made.
+The site was tested manually across a range of devices to ensure all links and styling work correctly and to ensure responsiveness. All features on the page were tested, especially the form validation, to ensure user feedback worked properly and no faulty inputs could be made.
 
 Testing was carried out on multiple browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, Safari and Opera. Testing was carried out on an Apple iPhone 12, Apple iPhone 13, Huawei P20, iPad Mini and Windows 10 Desktops.
 
-### **Manual tests**
+## User Story Testing
 
-The manual testing was divided up into the websites different functions:
+These tests were continuously carried out during development, and on the finished deployed app which are the results below.
 
-1. Log in/log out
-2. Create account
-3. Contact form
-4. User panel
-5. Order form
-6. Customer form
-7. Send email
+In addition to the test detailed below, all site URLs were tested to ensure they took users to the correct page.
 
-#
+### Navigation
 
-1. **Log in/log out**
+#### User Story [#1](https://github.com/Johneriksson88/BeatBuddies/issues/1) | [#2](https://github.com/Johneriksson88/BeatBuddies/issues/2) | [#7](https://github.com/Johneriksson88/BeatBuddies/issues/7)
 
-| Expected outcome                                                                                    | Test                                                               | Result |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------ |
-| Clicking the Log in button takes me to the login page                                               | Click the login button                                             | PASS   |
-| Logging in with an invalid username gives me a feedback message                                     | Enter an invalid username                                          | PASS   |
-| Logging in with an invalid password gives me a feedback message                                     | Enter an invalid password                                          | PASS   |
-| Clicking any "Rent now" button on the landing page takes me to the log in page if I'm not logged in | Click every "Rent now" button on the landing page while logged out | PASS   |
-| Clicking any "Rent now" button on the landing page takes me to the order form if I'm logged in      | Click every "Rent now" button on the landing page while logged in  | PASS   |
-| Logging in as a new customer takes me to the customer form                                          | Create an new user and log in                                      | PASS   |
-| Logging in as an existing customer takes me to the user panel                                       | Log in as an existing user                                         | PASS   |
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 1 | As a **user** I can **view a navbar from every page** so that **I can navigate easily between pages**. | Visit every single page to make sure the navbar is there | PASS :white_check_mark: |
+| 2 | As a **user** I can **navigate through pages quickly** so that **I can view content seamlessly without page refresh**. | Visit all links to verify they direct users to their intended resources without the page reloading | PASS :white_check_mark: |
+| 3 | As a **logged out user** I can **see sign in and sign up options** so that **I can sign in/sign up** | Visit the app as a signed out user to make sure only the Home, Sign in and Sign Up links are in the navbar | PASS :white_check_mark: |
 
-2. **Create account**
+### Authentication
 
-| Expected outcome                                                                                                    | Test                                                                 | Result |
-| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------ |
-| Clicking the "Sign up" link on the log in page takes me to the register form                                        | Click "Sign up" on log in page                                       | PASS   |
-| Trying to register an account with an existing username gives me a feedback message                                 | Create an account with an existing username                          | PASS   |
-| Trying to enter a password that does not match Django standards for a safe password gives me a feedback message     | Create an account with the password "asd"                            | PASS   |
-| Trying to enter a different password in the "repeat password" input box gives me a feedback message                 | Create an account with the password "asd" and repeat password "asdf" | PASS   |
-| Successfully filling the register form takes me to the login page and gives me feedback that my account was created | Create an account with correct username and password                 | PASS   |
+#### User Story [#3](https://github.com/Johneriksson88/BeatBuddies/issues/3) | [#4](https://github.com/Johneriksson88/BeatBuddies/issues/4) | [#5](https://github.com/Johneriksson88/BeatBuddies/issues/5) | [#6](https://github.com/Johneriksson88/BeatBuddies/issues/6)
 
-3. **Contact form**
 
-| Expected outcome                                                                                                | Test                                                 | Result |
-| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------ |
-| Submitting the form without input gives me a feedback message                                                   | Click "Send" without entering anything into the form | PASS   |
-| Submitting the form without entering a name gives me a feedback message                                         | Fill all form fields but name field                  | PASS   |
-| Submitting the form without entering an email gives me a feedback message                                       | Fill all form fields but email field                 | PASS   |
-| Submitting the form entering an invalid email address gives me a feedback message                               | Enter an email without an "@" symbol                 | PASS   |
-| Submitting the form without entering a message gives me a feedback message                                      | Fill all form fields but message field               | PASS   |
-| Submitting the form with valid input gives me feedback that a message was sent and takes me to the landing page | Enter valid input in the form                        | PASS   |
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 4 | As a **user** I can **create a new account** so that **I can access all the features for signed up users** | <ul><li>Create new account and login</li><li>Try to create account with already taken username, blank username, and not matching passwords to ensure validation messages show</li></ul> | PASS |
+| 5 | As a **user** I can **sign in to the app** so that **I can access functionality for logged in users** | Login and ensure I'm redirected to home page and navbar has additional links | PASS :white_check_mark: |
+| 6 | As a **user** I can **tell if I am logged in or not** so that **I can log in if I need to** | <ul><li>Visit the page as a logged out user and ensure there is a log in button in navbar</li><li>Log in and ensure the profile and log out links are there instead</li></ul> | PASS :white_check_mark: |
+| 7 | As a **user** I can **maintain my logged-in status until I choose to log out** so that **my user experience is not compromised** | Stay logged in for 12 hours and ensure I'm not being logged out (Jason Web Tokens are set up to make sure I'm not getting logged out) | PASS :white_check_mark: |
 
-4. **User panel**
+### Adding And Liking Posts
 
-| Expected outcome                                                                                                              | Test                                                     | Result |
-| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
-| The user panel displays my current orders and contact information                                                             | Go to user panel as a user with current orders           | PASS   |
-| If i haven't made any orders yet, I am informed in the "My orders" list                                                       | Go to user panel as a user without any orders            | PASS   |
-| Deleting an order takes me to a confirmation page where the relevant order information is displayed                           | Click the trash can icon next to any order               | PASS   |
-| Confirming the deletion of an order gives me a feedback message with the relevant order number                                | Delete any order and click confirm                       | PASS   |
-| Clicking the "Delete account" takes me to a confirmation page to make sure i have to confirm the deletion                     | Click "Delete account" being logged in as a user         | PASS   |
-| Clicking "Delete" on the confirmation page logs the user out, deletes the user from the database and shows a feedback message | Click "Delete" on the account deletion confirmation page | PASS   |
+#### User Story [#9](https://github.com/Johneriksson88/BeatBuddies/issues/9) | [#10](https://github.com/Johneriksson88/BeatBuddies/issues/10) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/11)
 
-5. **Order form**
+<ul><li></li><li></li></ul>
 
-| Expected outcome                                                                                         | Test                                                     | Result |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
-| Not selecting a storage unit in the dropdown list gives me a feedback message                            | Submit the order without a selected storage unit         | PASS   |
-| Not selecting a start date gives me a feedback message                                                   | Submit the order without a selected start date           | PASS   |
-| Selecting a start date that is back in time gives me a feedback message                                  | Submit the order with a start date back in time selected | PASS   |
-| Sucessfully filling the order form takes me to a confirmation page where the order details are displayed | Enter correct input in order form                        | PASS   |
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 8 | As a **logged in user** I can **create posts** so that **I can share songs with the world** | Create a post and ensure it shows up on top of the home feed or profile page | PASS :white_check_mark: |
+| 9 | As a **user** I can **view the details of a single post** so that **I can learn more about it** | A post shows owner, date, artist/song, image, title, content, moods, number of likes and comments | PASS :white_check_mark: |
+| 10 | As a **logged in user** I can **like a post** so that **I can show my support for the posts that interest me** | <ul><li>Click like on a post and ensure the likes count go up by 1 and the post appears on the liked pag</li><li>Try to like my own post to ensure the alert message saying "You cannot like your own posts" shows</li></ul> | PASS :white_check_mark: |
 
-6. **Customer form**
+### The Posts Page
 
-| Expected outcome                                                                    | Test                                                                           | Result |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------ |
-| Submitting any or all fields without imput gives me a feedback message              | Submit the form without input, then one time leaving one field at a time empty | PASS   |
-| Submitting the form entering an invalid email address gives me a feedback message   | Enter an email without an "@" symbol                                           | PASS   |
-| Submitting the form entering an invalid Swedish zipcode gives me a feedback message | Enter a zipcode with only 4 digits                                             | PASS   |
+#### User Story [#12](https://github.com/Johneriksson88/BeatBuddies/issues/12) | [#13](https://github.com/Johneriksson88/BeatBuddies/issues/13) | [#14](https://github.com/Johneriksson88/BeatBuddies/issues/14) | [#15](https://github.com/Johneriksson88/BeatBuddies/issues/15) | [#16](https://github.com/Johneriksson88/BeatBuddies/issues/16)
 
-7. **Send email**
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 11 | As a **user** I can **view all the most recent posts, ordered by most recently created first** so that **I am up to date with the newest content** | Visit home feed and ensure posts are displayed in descending order of creation date. | PASS :white_check_mark: |
+| 12 | As a **user**, I can **search for posts with keywords**, so that **I can find the posts and user profiles I am most interested in** | Enter any search word on home feed and ensure either the username, title, artist or song matches the search word  | PASS :white_check_mark: |
+| 13 | As a **logged in user** I can **view the posts I liked** so that **I can find the posts I enjoy the most** | Visit the liked page and ensure the posts shown there correspond to the ones I've liked | PASS :white_check_mark: |
+| 14 | As a **logged in user** I can **view content filtered by users I follow** so that **I can keep up to date with what they are posting about** |  Visit feed page and ensure the posts are from users I've followed | PASS :white_check_mark: |
+| 15 | As a **user** I can **keep scrolling through the posts on the site** so that **I don't have to click on "next page" etc** | Ensure there are more than 10 total posts, scroll down to the 10th and, after a loading spinner shows, more posts appear under the first 10 | PASS :white_check_mark: |
 
-| Expected outcome                                                                                   | Test                                 | Result |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------ | ------ |
-| Sending an email from the contact form successfully sends an email to the Mailtrap SMTP test email | Fill the concact form and hit "Send" | PASS   |
-| When making a new order an email notification is sent to the Mailtrap SMTP test email              | Make a new order in the User panel   | PASS   |
-| When deleting an order an email notification is sent to the Mailtrap SMTP test email               | Delete an order in the User panel    | PASS   |
+### The Post Page
 
-#
+#### User Story [#17](https://github.com/Johneriksson88/BeatBuddies/issues/17) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/18) | [#19](https://github.com/Johneriksson88/BeatBuddies/issues/19) | [#20](https://github.com/Johneriksson88/BeatBuddies/issues/20) | [#21](https://github.com/Johneriksson88/BeatBuddies/issues/21) | [#22](https://github.com/Johneriksson88/BeatBuddies/issues/22) [#23](https://github.com/Johneriksson88/BeatBuddies/issues/23)
 
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 16 | As a **user** I can **view the posts page** so that **I can read the comments about the post** | Click on a post and ensure the comments are shown below | PASS :white_check_mark: |
+| 17 | As a **post owner** I can **edit my post title and description** so that **I can make corrections or update my post after it was created** | Go to one of my own posts, click the menu, press edit, edit the post and ensure the changes are shown in the updated post | PASS :white_check_mark: |
+| 18 | As a **logged in user** I can **add comments to a post** so that **I can share my thoughts about the post** | Go to any post, comment and ensure the comment shows under the post | PASS :white_check_mark: |
+| 19 | As a **user** I can **see how long ago a comment was made** so that **I know how old a comment is** | Go to any post with comments and ensure there is a datestamp on each comment | PASS :white_check_mark: |
+| 20 | As a **user** I can **read comments on posts** so that **I can read what other users think about the posts** | Go to any post with comments and ensure the comments are shown below the post | PASS :white_check_mark: |
+| 21 | As an **owner of a comment** I can **delete my comment** so that **I can control removal of my comment from the application** | Go to one of my own comments, delete the comment and ensure it is gone from the comment section | PASS :white_check_mark: |
+| 22 | As an **owner of a comment** I can **edit my comment** so that **I can fix or update my existing comment** | Go to one of my own comments, edit it and ensure the changed comment is shown in the comment section | PASS :white_check_mark: |
+
+### The Profile Page
+
+#### User Story [#24](https://github.com/Johneriksson88/BeatBuddies/issues/24) | [#25](https://github.com/Johneriksson88/BeatBuddies/issues/25) | [#26](https://github.com/Johneriksson88/BeatBuddies/issues/26) | [#27](https://github.com/Johneriksson88/BeatBuddies/issues/27) | [#28](https://github.com/Johneriksson88/BeatBuddies/issues/28) | [#29](https://github.com/Johneriksson88/BeatBuddies/issues/29) [#30](https://github.com/Johneriksson88/BeatBuddies/issues/30)
+
+- .
+- .
+- .
+- .
+- .
+- As a **logged in user** I can **edit my profile** so that **I can change my profile picture and bio**.
+- As a **logged in user** I can **update my username and password** so that **I can change my display name and keep my profile secure**.
+
+| Test # | User story | Test | Result |
+|---|---|---|---|
+| 23 | As a **user** I can **view other users profiles** so that **I can see their posts and learn more about them** | Go to any profile and ensure the correct content is displayed | PASS :white_check_mark: |
+| 24 | As a **user** I can **see a list of the most followed profiles** so that **I can see which profiles are popular** | Go to the home page and ensure the popular profiles are shown on the right (top on mobile) | PASS :white_check_mark: |
+| 25 | As a **user** I can **view statistics about a specific user: bio, number of posts, follows and users followed** so that **I can learn more about them** | Go to any profile and ensure the username, avatar, number of posts, followed and followers count and bio text are displayed | PASS :white_check_mark: |
+| 26 | As a **logged in user** I can **follow and unfollow other users** so that **I can see and remove posts by specific users in my posts feed** | Follow a user from the profile page or popular profiles section and ensure their posts are shown in your feed page and that the following count on your profile goes up by 1 | PASS :white_check_mark: |
+| 27 | As a **user** I can **view all the posts by a specific user** so that **I can catch up on their latest posts, or decide I want to follow them** | All posts created by the user are displayed on the "Posts" page. | PASS :white_check_mark: |
+| 28 | Click on the "Edit Profile" button.(DOTS) and update the profile picture and bio. | The updated profile picture and bio are displayed on the user profile page after clicking on the "Save" button | PASS :white_check_mark: |
+| 29 | Click on the "Edit" button.(DOTS) "Change Username" and "Change Password. | The updated username and password are displayed on the account settings page after clicking on the "Save" button and the login is successful with the updated credentials. | PASS :white_check_mark: |
 ## **Lighthouse Testing**
 
 ![Lighthouse Test Result Image](main/static/readme/lighthouse_summary.png)
