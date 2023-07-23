@@ -467,6 +467,8 @@ This section covers all technology components and choices.
   - to communicate with the API.
 - [React-Select 5.7.3](https://react-select.com/home)
   - mood select box in post create form
+- [Eslint for React](https://www.npmjs.com/package/eslint-plugin-react?activeTab=readme)
+  - linter for maintaining code standard
 
 ### Web services
 
@@ -581,7 +583,7 @@ These steps were followed to deploy the back end Django REST API:
 
 <u>In Heroku</u>
 
-1. Follow steps as presented in the deployment of the [front end](#front-end) above, up to step 5
+1. Follow steps as presented in the deployment of the [front end](#front-end) above, up to step 6
 2. Add all necessary config vars:
    ```
    SECRET_KEY = [your-django-secret-key]
@@ -591,19 +593,26 @@ These steps were followed to deploy the back end Django REST API:
    ALLOWED_HOST = [your-deployed-api-url]
    CLIENT_ORIGIN = [your-deployed-front-end-url]
    ```
+3. Go to the Deploy tab, scroll down and hit deploy
+4. Click the "Open app" button on the top and make sure the app is working
 
 #
 
 ## Testing
 
-### **HTML and CSS**
+### Code validation
 
-The HTML and CSS was tested using the tools made available by the [World Wide Web Consortium](https://www.w3.org/), also known as "W3C".
+The font end code (JSX, Javascript) has been validated through production via the eslint-react plugin and formatted by the prettier extention. All errors and warnings has been adressed as they came.
 
-The two tools used were the [Markup Validation Service](https://validator.w3.org/#validate_by_uri) and the [CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_uri).
+The back end code (Python) has been validated in the same way as the front end above, but with the autopep8 plugin for Python.
 
-All HTML-files and the styles.css-file were tested without any errors.
+### CSS validation
 
+The [W3C CSS Validator Service] was used to validate the project's custom CSS files to ensure there were no syntax errors.
+
+| File | Result |
+|---|---|
+| [Asset.module.css](https://raw.githubusercontent.com/llancruzz/hogwarts/main/docs/asset-css.png) | PASS :white_check_mark: |
 ### **HTML Validator Problems**
 
 In using the "Validate by URI" function in the HTML validator, I found that the validator was throwing errors related to the jinja templating language mixed with the HTML (for example for and if statements as "{% if x == y %}"). The solution i found was to open the page in a browser, righ click anywhere on the page and press "Check page source", and copying the output HTML directly from there and put it in the "Validate by Direct Input" function. This way i get the fully rendered HTML without the jinja template tags and the validation threw no errors.
