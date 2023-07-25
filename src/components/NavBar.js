@@ -102,9 +102,9 @@ const NavBar = () => {
         <NavLink to="/">
           <Navbar.Brand>
             <img src={cardiogram} alt="logo" height="70" className="d-inline" />
-            <h2 className={`d-none d-sm-inline ${styles.BrandName}`}>
+            <h1 className={`d-none d-sm-inline ${styles.BrandName}`}>
               <b>B</b>eat<b>B</b>uddies
-            </h2>
+            </h1>
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}

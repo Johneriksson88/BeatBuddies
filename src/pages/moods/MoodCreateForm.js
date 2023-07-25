@@ -31,7 +31,7 @@ function MoodCreateForm() {
     formData.append("name", name);
     try {
       await axiosReq.post("/moods/", formData);
-      history.push("/feed/");
+      history.push("/moods/");
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -78,7 +78,7 @@ function MoodCreateForm() {
                 Cancel
               </Button>
               <Button
-                className={`${btnStyles.Button} ${btnStyles.Warning}`}
+                className={`${btnStyles.Button} ${btnStyles.Blue}`}
                 type="submit"
               >
                 Create

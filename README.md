@@ -32,7 +32,6 @@ The back end repository: https://github.com/Johneriksson88/bb-api
   - [Colours](#colours)
   - [Fonts](#fonts)
   - [Favicon](#favicon)
-- [Database Models](#database-models)
 - [Features](#features)
   - [Navigation](#navigation)
   - [Home page](#home-page)
@@ -78,7 +77,6 @@ The back end repository: https://github.com/Johneriksson88/bb-api
   - [Images & Icons](#images--icons)
   - [Content](#content)
   - [Honorable mentions](#honorable-mentions)
-- [My thoughts](#my-thoughts)
 
 #
 
@@ -199,9 +197,12 @@ The goal of the wireframes was to get an idea of the layout of the different pag
 ![Profile page wireframe](src/assets/readme_images/beatbuddies_profile_page.png)
 
 ### Sign in page
+
 ![Sign in page wireframe](src/assets/readme_images/beatbuddies_sign_in.png)
 
 ## Design
+
+The app was designed with simple colours and straight forward layout. I wanted the app to be all about the content and functionality, so a laid back design made sense to not take up too much visual space.
 
 ## Imagery
 
@@ -260,43 +261,6 @@ The favicon is the same icon as in the logo, only a smaller size.
 ![favicon]()
 
 #
-
-## Database Models
-
-For the backend part of BeatBuddies I used the [Django REST framework](https://www.django-rest-framework.org/). I first created the models, and then the serializers and views.
-The database schema were planned out in [dbdesigner.net](https://www.dbdesigner.net/). DBDesigner is an intuitive browser-based tool to create database schemas.
-
-All models and their respective fields can be seen below:
-
-![database schema](/src/assets/readme_images/beatbuddies_db_schema.png)
-
-### User model
-
-The User model takes advantage of the inbuilt User model of Django REST, hence it can not be found in the API directory. It consists of many optional fields, but for this app I am only using the username and password fields.
-
-### Profiles model
-
-The Profiles model contains the information presented on the profile page. It connects to the User model through a one-to-one relationship.
-
-### Posts model
-
-The Posts model contains all the information presented in the Post component, which is used on multiple pages. It connects to the Moods model through a many-to-many relationship (one post can have several moods and one mood can be in several posts) and to the User, Comments and Like models through a one-to-one relationship respectively.
-
-### Moods model
-
-The Moods model contains all the different moods created by the users. The moods are displayed on posts that contains them, as well as on the moods and mood page. It connects to the User model through a one-to-one field and to the Posts model through a many-to-many relationship (explained in the Posts model above).
-
-### Likes model
-
-The Likes model holds the likes created by users. It connects to the Posts and User models through one-to-one relationships respectively.
-
-### Comments model
-
-The Comments model holds all the comments displayed under the individual posts on the post page. It connects to the Posts and User models through one-to-one relationships respectively.
-
-### Followers model
-
-The followers model holds all the links between the users following each other. This was the model that was the hardest for me to get my head around. Basically, the owner field holds the user following another user, and the followed field holds the user that is being followed. Both through one-to-one fields.
 
 ## Features
 
@@ -443,10 +407,11 @@ All forms are validated via the back-end, except for the select box in the post 
 
 - Search moods
 - Create mood directly in the create post form
-- Sucess messages, i.e. "Post successfully created!"
+- Sucess messages, e.g. "Post successfully created!"
 - Popular moods component
 - Reposting of others posts
-- Autocomplete of adding songs through i.e. the Spotify or YouTube API. This would also automatically fill the "link" field of the post.
+- Autocomplete of adding songs through e.g. the Spotify or YouTube API. This would also automatically fill the "link" field of the post.
+- Faster database hosting
 
 #
 
@@ -464,19 +429,15 @@ This section covers all technology components and choices.
   - Reacts clever way of writing JavaScript code combined with HTML.
 - [CSS 3](https://www.w3schools.com/css/default.asp)
   - custom styling.
-- [Python](https://www.python.org/)
-  - an interpreted, high-level, and general-purpose programming language.
 
 ### Frameworks
 
 - [React JS 11.2.7](https://react.dev/)
-  - Main framework for creating the front end
+  - main framework for creating the front end
 - [Bootstrap 4.6.0](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
   - to style the content.
 - [React Bootstrap 1.6.3](https://www.npmjs.com/package/react-bootstrap)
   - to optimize bootstrap usage with react.
-- [Django REST 3.14.0](https://www.django-rest-framework.org/)
-  - a powerful Python based framework for creating APIs.
 
 ### Libraries
 
@@ -485,7 +446,9 @@ This section covers all technology components and choices.
 - [React-Select 5.7.3](https://react-select.com/home)
   - mood select box in post create form
 - [Eslint for React](https://www.npmjs.com/package/eslint-plugin-react?activeTab=readme)
-  - linter for maintaining code standard
+  - linter for maintaining code standard and catching syntax or logical errors
+- [Prettier](https://prettier.io/)
+  - code formatter
 
 ### Web services
 
@@ -501,23 +464,19 @@ This section covers all technology components and choices.
   - for deployment and hosting.
 - [Visily](https://www.visily.ai/)
   - to create the wireframes.
-- [DB Designer](https://www.dbdesigner.net/)
-  - to create the database schema.
 - [ElephantSQL](https://www.elephantsql.com/)
-  - database hosting. 
+  - database hosting.
 - [Am i responsive?](https://ui.dev/amiresponsive)
   - image of app on different screen sizes
 - [Venngage](https://venngage.com/)
   - accessible color palette
 
-
 #
 
 ## Deployment
 
-### Front end
 
-These steps were followed to deploy the front end React app:
+These steps were followed to deploy:
 
 1. Login or Sign up to Heroku
 2. Create new app
@@ -528,380 +487,273 @@ These steps were followed to deploy the front end React app:
 7. Scroll down and hit deploy
 8. Open app and confirm you can view the app
 
-### Back end
-
-These steps were followed to deploy the back end Django REST API:
-
-<u>In the project</u>
-
-1. Install gunicorn and django-cors-headers in the terminal:
-   ```
-   pip3 install gunicorn django-cors-headers
-   ```
-2. Update the requirements.txt-file:
-   ```
-   pip freeze --local > requirements.txt
-   ```
-3. Create a Procfile in the root directory and add these commands:
-   ```
-   release: python manage.py makemigrations && python manage.py migrate
-   web: gunicorn drf_api.wsgi
-   ```
-4. Add the "ALLOWED_HOSTS" variable in settings.py:
-   ```
-   ALLOWED_HOSTS = ['localhost', '<your_app_name>.herokuapp.com']
-   ```
-5. Add corsheaders to INSTALLED_APPS:
-
-   ```
-   INSTALLED_APPS = [
-   ...
-   'dj_rest_auth.registration',
-   'corsheaders',
-   ...
-   ]
-   ```
-
-6. Add corsheaders middleware to the TOP of the MIDDLEWARE:
-   ```
-     MIDDLEWARE = [
-     'corsheaders.middleware.CorsMiddleware',
-     ...
-       ]
-   ```
-7. Under the MIDDLEWARE list, set the ALLOWED_ORIGINS for the network requests made to the server:
-   ```
-   if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-   else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
-    ]
-   ```
-8. Enable sending cookies in cross-origin requests so that users can get authentication functionality:
-
-   ```
-   else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
-    ]
-
-   CORS_ALLOW_CREDENTIALS = True
-   ```
-
-9. To be able to have the front end app and the API deployed to different platforms, set the JWT_AUTH_SAMESITE attribute to 'None'. Without this the cookies would be blocked:
-   ```
-   JWT_AUTH_COOKIE = 'my-app-auth'
-   JWT_AUTH_REFRESH_COOKE = 'my-refresh-token'
-   JWT_AUTH_SAMESITE = 'None'
-   ```
-10. Again, make sure the requirements.txt-file is up to date:
-    ```
-    pip freeze --local > requirements.txt
-    ```
-
-<u>In Heroku</u>
-
-1. Follow steps as presented in the deployment of the [front end](#front-end) above, up to step 6
-2. Add all necessary config vars:
-   ```
-   SECRET_KEY = [your-django-secret-key]
-   CLOUDINARY_URL = [your-cloudinary-url]
-   DATABASE_URL = [your-database-url]
-   DISABLE_COLLECTSTATIC = 1
-   ALLOWED_HOST = [your-deployed-api-url]
-   CLIENT_ORIGIN = [your-deployed-front-end-url]
-   ```
-3. Go to the Deploy tab, scroll down and hit deploy
-4. Click the "Open app" button on the top and make sure the app is working
-
 #
 
 ## Testing
 
 ### Code validation
 
-The font end code (JSX, Javascript) has been validated through production via the eslint-react plugin and formatted by the prettier extention. All errors and warnings were adressed as they came.
-
-The back end code (Python) has been validated in the same way as the front end above, but with the autopep8 plugin for Python.
+The code has been validated through production via the eslint-react plugin and formatted by the prettier extention. All errors and warnings were adressed as they came.
 
 ### CSS validation
 
 The [W3C CSS Validator Service] was used to validate the project's custom CSS files to ensure there were no syntax errors.
 
-| File | Result |
-|---|---|
-| Asset.module.css | PASS :white_check_mark: |
-| Button.module.css| PASS :white_check_mark: |
-| Comment.module.css | PASS :white_check_mark: |
+| File                             | Result                  |
+| -------------------------------- | ----------------------- |
+| Asset.module.css                 | PASS :white_check_mark: |
+| Button.module.css                | PASS :white_check_mark: |
+| Comment.module.css               | PASS :white_check_mark: |
 | CommentCreateEditForm.module.css | PASS :white_check_mark: |
-| MoodCreateForm.module.css | PASS :white_check_mark: |
-| MoodsPage.module.css | PASS :white_check_mark: |
-| MoreDropdown.module.css | PASS :white_check_mark: |
-| NavBar.module.css | PASS :white_check_mark: |
-| NotFound.module.css | PASS :white_check_mark: |
-| Post.module.css | PASS :white_check_mark: |
-| PostCreateEditForm.module.css | PASS :white_check_mark: |
-| PostsPage.module.css | PASS :white_check_mark: |
-| Profile.module.css | PASS :white_check_mark: |
-| ProfilePage.module.css | PASS :white_check_mark: |
-| ProfilePicture.module.css | PASS :white_check_mark: |
-| SignInUpForm.module.css | PASS :white_check_mark: |
-
+| MoodCreateForm.module.css        | PASS :white_check_mark: |
+| MoodsPage.module.css             | PASS :white_check_mark: |
+| MoreDropdown.module.css          | PASS :white_check_mark: |
+| NavBar.module.css                | PASS :white_check_mark: |
+| NotFound.module.css              | PASS :white_check_mark: |
+| Post.module.css                  | PASS :white_check_mark: |
+| PostCreateEditForm.module.css    | PASS :white_check_mark: |
+| PostsPage.module.css             | PASS :white_check_mark: |
+| Profile.module.css               | PASS :white_check_mark: |
+| ProfilePage.module.css           | PASS :white_check_mark: |
+| ProfilePicture.module.css        | PASS :white_check_mark: |
+| SignInUpForm.module.css          | PASS :white_check_mark: |
 
 ## **Manual Testing**
 
-The site was tested manually across a range of devices to ensure all links and styling work correctly and to ensure responsiveness. All features on the page were tested, especially the form validation, to ensure user feedback worked properly and no faulty inputs could be made.
+The site was tested manually across a range of devices to ensure all links and styling work correctly and to ensure responsiveness. All features on the page were tested, especially the form validation, to ensure user feedback worked properly and no faulty or empty inputs could be made.
 
-Testing was carried out on multiple browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, Safari and Opera. Testing was carried out on an Apple iPhone 12, Apple iPhone 13, Huawei P20, iPad Mini and Windows 10 Desktops.
+Testing was carried out on multiple browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, Safari and Opera. Devices tested on were Apple iPhone 12, Apple iPhone 13, Huawei P20, iPad Mini and Windows 10 Desktops.
 
 ## User Story Testing
 
 These tests were continuously carried out during development, and on the finished deployed app which are the results below.
 
-In addition to the test detailed below, all site URLs were tested to ensure they took users to the correct page.
+Additional tests done:
+
+- Test that all links takes the user to the correct page
+- Test that form validation works
+  - Try to submit with empty form fields (only on required fields)
+  - Try to submit with incorrect input (e.g. not matching password in sign up form, invalid URL in link field in post create form etc.)
 
 ### Navigation
 
-#### User Story [#1](https://github.com/Johneriksson88/BeatBuddies/issues/1) | [#2](https://github.com/Johneriksson88/BeatBuddies/issues/2) | [#7](https://github.com/Johneriksson88/BeatBuddies/issues/7)
+#### User Stories [#1](https://github.com/Johneriksson88/BeatBuddies/issues/1) | [#2](https://github.com/Johneriksson88/BeatBuddies/issues/2) | [#7](https://github.com/Johneriksson88/BeatBuddies/issues/7)
 
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 1 | As a **user** I can **view a navbar from every page** so that **I can navigate easily between pages**. | Visit every single page to make sure the navbar is there | PASS :white_check_mark: |
-| 2 | As a **user** I can **navigate through pages quickly** so that **I can view content seamlessly without page refresh**. | Visit all links to verify they direct users to their intended resources without the page reloading | PASS :white_check_mark: |
-| 3 | As a **logged out user** I can **see sign in and sign up options** so that **I can sign in/sign up** | Visit the app as a signed out user to make sure only the Home, Sign in and Sign Up links are in the navbar | PASS :white_check_mark: |
+| Test # | User story                                                                                                             | Test                                                                                                       | Result                  |
+| ------ | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 1      | As a **user** I can **view a navbar from every page** so that **I can navigate easily between pages**.                 | Visit every single page to make sure the navbar is there                                                   | PASS :white_check_mark: |
+| 2      | As a **user** I can **navigate through pages quickly** so that **I can view content seamlessly without page refresh**. | Visit all links to verify they direct users to their intended resources without the page reloading         | PASS :white_check_mark: |
+| 3      | As a **logged out user** I can **see sign in and sign up options** so that **I can sign in/sign up**                   | Visit the app as a signed out user to make sure only the Home, Sign in and Sign Up links are in the navbar | PASS :white_check_mark: |
 
 ### Authentication
 
-#### User Story [#3](https://github.com/Johneriksson88/BeatBuddies/issues/3) | [#4](https://github.com/Johneriksson88/BeatBuddies/issues/4) | [#5](https://github.com/Johneriksson88/BeatBuddies/issues/5) | [#6](https://github.com/Johneriksson88/BeatBuddies/issues/6)
+#### User Stories [#3](https://github.com/Johneriksson88/BeatBuddies/issues/3) | [#4](https://github.com/Johneriksson88/BeatBuddies/issues/4) | [#5](https://github.com/Johneriksson88/BeatBuddies/issues/5) | [#6](https://github.com/Johneriksson88/BeatBuddies/issues/6)
 
-
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 4 | As a **user** I can **create a new account** so that **I can access all the features for signed up users** | <ul><li>Create new account and login</li><li>Try to create account with already taken username, blank username, and not matching passwords to ensure validation messages show</li></ul> | PASS |
-| 5 | As a **user** I can **sign in to the app** so that **I can access functionality for logged in users** | Login and ensure I'm redirected to home page and navbar has additional links | PASS :white_check_mark: |
-| 6 | As a **user** I can **tell if I am logged in or not** so that **I can log in if I need to** | <ul><li>Visit the page as a logged out user and ensure there is a log in button in navbar</li><li>Log in and ensure the profile and log out links are there instead</li></ul> | PASS :white_check_mark: |
-| 7 | As a **user** I can **maintain my logged-in status until I choose to log out** so that **my user experience is not compromised** | Stay logged in for 12 hours and ensure I'm not being logged out (Jason Web Tokens are set up to make sure I'm not getting logged out) | PASS :white_check_mark: |
+| Test # | User story                                                                                                                       | Test                                                                                                                                                                                    | Result                  |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 4      | As a **user** I can **create a new account** so that **I can access all the features for signed up users**                       | <ul><li>Create new account and login</li><li>Try to create account with already taken username, blank username, and not matching passwords to ensure validation messages show</li></ul> | PASS                    |
+| 5      | As a **user** I can **sign in to the app** so that **I can access functionality for logged in users**                            | Login and ensure I'm redirected to home page and navbar has additional links                                                                                                            | PASS :white_check_mark: |
+| 6      | As a **user** I can **tell if I am logged in or not** so that **I can log in if I need to**                                      | <ul><li>Visit the page as a logged out user and ensure there is a log in button in navbar</li><li>Log in and ensure the profile and log out links are there instead</li></ul>           | PASS :white_check_mark: |
+| 7      | As a **user** I can **maintain my logged-in status until I choose to log out** so that **my user experience is not compromised** | Stay logged in for 12 hours and ensure I'm not being logged out (Jason Web Tokens are set up to make sure I'm not getting logged out)                                                   | PASS :white_check_mark: |
 
 ### Adding And Liking Posts
 
-#### User Story [#9](https://github.com/Johneriksson88/BeatBuddies/issues/9) | [#10](https://github.com/Johneriksson88/BeatBuddies/issues/10) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/11)
+#### User Stories [#9](https://github.com/Johneriksson88/BeatBuddies/issues/9) | [#10](https://github.com/Johneriksson88/BeatBuddies/issues/10) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/11)
 
-<ul><li></li><li></li></ul>
-
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 8 | As a **logged in user** I can **create posts** so that **I can share songs with the world** | Create a post and ensure it shows up on top of the home feed or profile page | PASS :white_check_mark: |
-| 9 | As a **user** I can **view the details of a single post** so that **I can learn more about it** | A post shows owner, date, artist/song, image, title, content, moods, number of likes and comments | PASS :white_check_mark: |
-| 10 | As a **logged in user** I can **like a post** so that **I can show my support for the posts that interest me** | <ul><li>Click like on a post and ensure the likes count go up by 1 and the post appears on the liked pag</li><li>Try to like my own post to ensure the alert message saying "You cannot like your own posts" shows</li></ul> | PASS :white_check_mark: |
+| Test # | User story                                                                                                     | Test                                                                                                                                                                                                                         | Result                  |
+| ------ | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 8      | As a **logged in user** I can **create posts** so that **I can share songs with the world**                    | Create a post and ensure it shows up on top of the home feed or profile page                                                                                                                                                 | PASS :white_check_mark: |
+| 9      | As a **user** I can **view the details of a single post** so that **I can learn more about it**                | A post shows owner, date, artist/song, image, title, content, moods, number of likes and comments                                                                                                                            | PASS :white_check_mark: |
+| 10     | As a **logged in user** I can **like a post** so that **I can show my support for the posts that interest me** | <ul><li>Click like on a post and ensure the likes count go up by 1 and the post appears on the liked pag</li><li>Try to like my own post to ensure the alert message saying "You cannot like your own posts" shows</li></ul> | PASS :white_check_mark: |
 
 ### The Posts Page
 
-#### User Story [#12](https://github.com/Johneriksson88/BeatBuddies/issues/12) | [#13](https://github.com/Johneriksson88/BeatBuddies/issues/13) | [#14](https://github.com/Johneriksson88/BeatBuddies/issues/14) | [#15](https://github.com/Johneriksson88/BeatBuddies/issues/15) | [#16](https://github.com/Johneriksson88/BeatBuddies/issues/16)
+#### User Stories [#12](https://github.com/Johneriksson88/BeatBuddies/issues/12) | [#13](https://github.com/Johneriksson88/BeatBuddies/issues/13) | [#14](https://github.com/Johneriksson88/BeatBuddies/issues/14) | [#15](https://github.com/Johneriksson88/BeatBuddies/issues/15) | [#16](https://github.com/Johneriksson88/BeatBuddies/issues/16)
 
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 11 | As a **user** I can **view all the most recent posts, ordered by most recently created first** so that **I am up to date with the newest content** | Visit home feed and ensure posts are displayed in descending order of creation date. | PASS :white_check_mark: |
-| 12 | As a **user**, I can **search for posts with keywords**, so that **I can find the posts and user profiles I am most interested in** | Enter any search word on home feed and ensure either the username, title, artist or song matches the search word  | PASS :white_check_mark: |
-| 13 | As a **logged in user** I can **view the posts I liked** so that **I can find the posts I enjoy the most** | Visit the liked page and ensure the posts shown there correspond to the ones I've liked | PASS :white_check_mark: |
-| 14 | As a **logged in user** I can **view content filtered by users I follow** so that **I can keep up to date with what they are posting about** |  Visit feed page and ensure the posts are from users I've followed | PASS :white_check_mark: |
-| 15 | As a **user** I can **keep scrolling through the posts on the site** so that **I don't have to click on "next page" etc** | Ensure there are more than 10 total posts, scroll down to the 10th and, after a loading spinner shows, more posts appear under the first 10 | PASS :white_check_mark: |
+| Test # | User story                                                                                                                                         | Test                                                                                                                                        | Result                  |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 11     | As a **user** I can **view all the most recent posts, ordered by most recently created first** so that **I am up to date with the newest content** | Visit home feed and ensure posts are displayed in descending order of creation date.                                                        | PASS :white_check_mark: |
+| 12     | As a **user**, I can **search for posts with keywords**, so that **I can find the posts and user profiles I am most interested in**                | Enter any search word on home feed and ensure either the username, title, artist or song matches the search word                            | PASS :white_check_mark: |
+| 13     | As a **logged in user** I can **view the posts I liked** so that **I can find the posts I enjoy the most**                                         | Visit the liked page and ensure the posts shown there correspond to the ones I've liked                                                     | PASS :white_check_mark: |
+| 14     | As a **logged in user** I can **view content filtered by users I follow** so that **I can keep up to date with what they are posting about**       | Visit feed page and ensure the posts are from users I've followed                                                                           | PASS :white_check_mark: |
+| 15     | As a **user** I can **keep scrolling through the posts on the site** so that **I don't have to click on "next page" etc**                          | Ensure there are more than 10 total posts, scroll down to the 10th and, after a loading spinner shows, more posts appear under the first 10 | PASS :white_check_mark: |
 
 ### The Post Page
 
-#### User Story [#17](https://github.com/Johneriksson88/BeatBuddies/issues/17) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/18) | [#19](https://github.com/Johneriksson88/BeatBuddies/issues/19) | [#20](https://github.com/Johneriksson88/BeatBuddies/issues/20) | [#21](https://github.com/Johneriksson88/BeatBuddies/issues/21) | [#22](https://github.com/Johneriksson88/BeatBuddies/issues/22) [#23](https://github.com/Johneriksson88/BeatBuddies/issues/23)
+#### User Stories [#17](https://github.com/Johneriksson88/BeatBuddies/issues/17) | [#18](https://github.com/Johneriksson88/BeatBuddies/issues/18) | [#19](https://github.com/Johneriksson88/BeatBuddies/issues/19) | [#20](https://github.com/Johneriksson88/BeatBuddies/issues/20) | [#21](https://github.com/Johneriksson88/BeatBuddies/issues/21) | [#22](https://github.com/Johneriksson88/BeatBuddies/issues/22) | [#23](https://github.com/Johneriksson88/BeatBuddies/issues/23)
 
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 16 | As a **user** I can **view the posts page** so that **I can read the comments about the post** | Click on a post and ensure the comments are shown below | PASS :white_check_mark: |
-| 17 | As a **post owner** I can **edit my post title and description** so that **I can make corrections or update my post after it was created** | Go to one of my own posts, click the menu, press edit, edit the post and ensure the changes are shown in the updated post | PASS :white_check_mark: |
-| 18 | As a **logged in user** I can **add comments to a post** so that **I can share my thoughts about the post** | Go to any post, comment and ensure the comment shows under the post | PASS :white_check_mark: |
-| 19 | As a **user** I can **see how long ago a comment was made** so that **I know how old a comment is** | Go to any post with comments and ensure there is a datestamp on each comment | PASS :white_check_mark: |
-| 20 | As a **user** I can **read comments on posts** so that **I can read what other users think about the posts** | Go to any post with comments and ensure the comments are shown below the post | PASS :white_check_mark: |
-| 21 | As an **owner of a comment** I can **delete my comment** so that **I can control removal of my comment from the application** | Go to one of my own comments, delete the comment and ensure it is gone from the comment section | PASS :white_check_mark: |
-| 22 | As an **owner of a comment** I can **edit my comment** so that **I can fix or update my existing comment** | Go to one of my own comments, edit it and ensure the changed comment is shown in the comment section | PASS :white_check_mark: |
+| Test # | User story                                                                                                                                 | Test                                                                                                                      | Result                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 16     | As a **user** I can **view the posts page** so that **I can read the comments about the post**                                             | Click on a post and ensure the comments are shown below                                                                   | PASS :white_check_mark: |
+| 17     | As a **post owner** I can **edit my post title and description** so that **I can make corrections or update my post after it was created** | Go to one of my own posts, click the menu, press edit, edit the post and ensure the changes are shown in the updated post | PASS :white_check_mark: |
+| 18     | As a **logged in user** I can **add comments to a post** so that **I can share my thoughts about the post**                                | Go to any post, comment and ensure the comment shows under the post                                                       | PASS :white_check_mark: |
+| 19     | As a **user** I can **see how long ago a comment was made** so that **I know how old a comment is**                                        | Go to any post with comments and ensure there is a datestamp on each comment                                              | PASS :white_check_mark: |
+| 20     | As a **user** I can **read comments on posts** so that **I can read what other users think about the posts**                               | Go to any post with comments and ensure the comments are shown below the post                                             | PASS :white_check_mark: |
+| 21     | As an **owner of a comment** I can **delete my comment** so that **I can control removal of my comment from the application**              | Go to one of my own comments, delete the comment and ensure it is gone from the comment section                           | PASS :white_check_mark: |
+| 22     | As an **owner of a comment** I can **edit my comment** so that **I can fix or update my existing comment**                                 | Go to one of my own comments, edit it and ensure the changed comment is shown in the comment section                      | PASS :white_check_mark: |
 
 ### The Profile Page
 
-#### User Story [#24](https://github.com/Johneriksson88/BeatBuddies/issues/24) | [#25](https://github.com/Johneriksson88/BeatBuddies/issues/25) | [#26](https://github.com/Johneriksson88/BeatBuddies/issues/26) | [#27](https://github.com/Johneriksson88/BeatBuddies/issues/27) | [#28](https://github.com/Johneriksson88/BeatBuddies/issues/28) | [#29](https://github.com/Johneriksson88/BeatBuddies/issues/29) [#30](https://github.com/Johneriksson88/BeatBuddies/issues/30)
+#### User Stories [#8](https://github.com/Johneriksson88/BeatBuddies/issues/8) | [#24](https://github.com/Johneriksson88/BeatBuddies/issues/24) | [#25](https://github.com/Johneriksson88/BeatBuddies/issues/25) | [#26](https://github.com/Johneriksson88/BeatBuddies/issues/26) | [#27](https://github.com/Johneriksson88/BeatBuddies/issues/27) | [#28](https://github.com/Johneriksson88/BeatBuddies/issues/28) | [#29](https://github.com/Johneriksson88/BeatBuddies/issues/29) | [#30](https://github.com/Johneriksson88/BeatBuddies/issues/30)
 
-- .
-- .
-- .
-- .
-- .
-- As a **logged in user** I can **edit my profile** so that **I can change my profile picture and bio**.
-- As a **logged in user** I can **update my username and password** so that **I can change my display name and keep my profile secure**.
+| Test # | User story                                                                                                                                              | Test                                                                                                                                                                         | Result                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 23     | As a **user** I can **view user's avatars** so that I **can easily identify users of the application**.                                                 | <ul><li>Go to home page and ensure avatars show in the popular profiles section</li><li>Go to profile page and ensure the avatar shows on top of the profile</li></ul>       | PASS :white_check_mark: |
+| 24     | As a **user** I can **view other users profiles** so that **I can see their posts and learn more about them**                                           | Go to any profile and ensure the correct content is displayed                                                                                                                | PASS :white_check_mark: |
+| 25     | As a **user** I can **see a list of the most followed profiles** so that **I can see which profiles are popular**                                       | Go to the home page and ensure the popular profiles are shown on the right (top on mobile)                                                                                   | PASS :white_check_mark: |
+| 26     | As a **user** I can **view statistics about a specific user: bio, number of posts, follows and users followed** so that **I can learn more about them** | Go to any profile and ensure the username, avatar, number of posts, followed and followers count and bio text are displayed                                                  | PASS :white_check_mark: |
+| 27     | As a **logged in user** I can **follow and unfollow other users** so that **I can see and remove posts by specific users in my posts feed**             | Follow a user from the profile page or popular profiles section and ensure their posts are shown in your feed page and that the following count on your profile goes up by 1 | PASS :white_check_mark: |
+| 28     | As a **user** I can **view all the posts by a specific user** so that **I can catch up on their latest posts, or decide I want to follow them**         | Go to any profile page that has posts and ensure the posts are only from the profile owner and sorted by newest                                                              | PASS :white_check_mark: |
+| 29     | As a **logged in user** I can **edit my profile** so that **I can change my profile picture and bio**                                                   | Go to my profile, any field and ensure I get redirected to the profile page with the updated information                                                                     | PASS :white_check_mark: |
+| 30     | As a **logged in user** I can **update my username and password** so that **I can change my display name and keep my profile secure**                   | <ul><li>Go to my profile and edit username or password</li><li>Log out and try logging in with the updated information</li></ul>                                             | PASS :white_check_mark: |
 
-| Test # | User story | Test | Result |
-|---|---|---|---|
-| 23 | As a **user** I can **view other users profiles** so that **I can see their posts and learn more about them** | Go to any profile and ensure the correct content is displayed | PASS :white_check_mark: |
-| 24 | As a **user** I can **see a list of the most followed profiles** so that **I can see which profiles are popular** | Go to the home page and ensure the popular profiles are shown on the right (top on mobile) | PASS :white_check_mark: |
-| 25 | As a **user** I can **view statistics about a specific user: bio, number of posts, follows and users followed** so that **I can learn more about them** | Go to any profile and ensure the username, avatar, number of posts, followed and followers count and bio text are displayed | PASS :white_check_mark: |
-| 26 | As a **logged in user** I can **follow and unfollow other users** so that **I can see and remove posts by specific users in my posts feed** | Follow a user from the profile page or popular profiles section and ensure their posts are shown in your feed page and that the following count on your profile goes up by 1 | PASS :white_check_mark: |
-| 27 | As a **user** I can **view all the posts by a specific user** so that **I can catch up on their latest posts, or decide I want to follow them** | All posts created by the user are displayed on the "Posts" page. | PASS :white_check_mark: |
-| 28 | Click on the "Edit Profile" button.(DOTS) and update the profile picture and bio. | The updated profile picture and bio are displayed on the user profile page after clicking on the "Save" button | PASS :white_check_mark: |
-| 29 | Click on the "Edit" button.(DOTS) "Change Username" and "Change Password. | The updated username and password are displayed on the account settings page after clicking on the "Save" button and the login is successful with the updated credentials. | PASS :white_check_mark: |
+### Moods
+
+#### User Stories [#31](https://github.com/Johneriksson88/BeatBuddies/issues/31) | [#32](https://github.com/Johneriksson88/BeatBuddies/issues/32) | [#33](https://github.com/Johneriksson88/BeatBuddies/issues/33) | [#34](https://github.com/Johneriksson88/BeatBuddies/issues/34)
+
+| Test # | User story                                                                                            | Test                                                                                                                                                                                                    | Result                  |
+| ------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| 31     | As a **user** I can **create new moods** so that I can **connect my posts to my own moods**           | <ul><li>Go to moods page and click on the New mood button</li><li>Create a mood and confirm the new mood appears in the select box in the create post form</li></ul>                                    | PASS :white_check_mark: |
+| 32     | As a **user** I can **assign moods to my posts** so that I can **connect my posts to feelings**       | <ul><li>Go to create post form and ensure the select box for moods is there</li><li>Create a post and confirm the moods are shown on the post</li></ul>                                                 | PASS :white_check_mark: |
+| 33     | As a **user** I can **view all moods** so that I can **see what moods are available**                 | Go to the moods page and ensure the moods are shown there                                                                                                                                               | PASS :white_check_mark: |
+| 34     | As a **user** I can view an individual mood so that I can **see what posts are related to that mood** | <ul><li>Go to moods page and click on any mood</li><li>Ensure the posts related to the mood appear under the header, and that the number of posts corresponds to the post count in the header</li></ul> | PASS :white_check_mark: |
+
 ## **Lighthouse Testing**
 
-![Lighthouse Test Result Image](main/static/readme/lighthouse_summary.png)
+![Lighthouse Test Result Image](src/assets/readme_images/lighthouse_test.png)
 
 A test was ran using Lighthouse within Google Chrome to verify performance and accessibility standards were met and to ensure best practices were followed.
 
-The following steps were done to improve the score on the Lighthouse test:
+To get a 100% on accessibility I had to add the "title" property to the comment button on posts, so that it was available for screen readers.
 
-- Contrasting text and background colors were altered until complying with AAA-standars, with help from Google Dev Tools for maximum readability.
-- Images were compressed by using [TinyPNG](https://tinypng.com/).
-- The 'loading = "lazy"' attribute was added to all images, to get them to load when they are scrolled down to, instead of them all loading when the page initially loads.
-- Add alt text to all images and aria-labels to all links.
+The free hosting on ElephantSQL slows down the performance a little, so if I were to launch this app as a real project I would pay for a faster database host. Also I would look into caching already loaded data, so the same API calls don't have to made over and over.
 
-The full report can be viewed [here](main/static/readme/lighthouse_expanded.pdf).
+The full report can be viewed [here](src/assets/readme_images/lighthouse_test.pdf).
 
 #
 
 ## **Wave Testing**
 
-![Wave Test Result Image](main/static/readme/wave_test.png)
+![Wave Test Result Image](src/assets/readme_images/wave_test.png)
 
-A further test was ran using the Web Accessibility Evaluation Tool (WAVE) to ensure no errors were returned and to verify that no constrast issues existed on the site. This was an important step to ensure that users with disabilities were not negatively impacted by the design of the site and that the relevant standards have been met.
+A further test was ran using the [Web Accessibility Evaluation Tool](https://wave.webaim.org/) (WAVE) to ensure no errors were returned and to verify that no constrast issues existed on the site. This was an important step to ensure that users with disabilities were not negatively impacted by the design of the site and that the relevant standards have been met.
 
-- The contrast warning seemed to be a bug in the validator, since i could not find the element where the warning occurred.
-- The Alerts related to the hierarchy of the header elements not appearing in falling order. I decided to ignore these alerts since i was happy with how the headings visually represented their respective elements.
+- The test came back with no errors
+- The brand name was previously in a h2 tag, and not h1 as it should. I changed it to a h1 tag, and this was pointed out to me by the WAVE alert below:
+- ![wave test header alert](src/assets/readme_images/heading_alert.png)
 
 #
 
 ## Bugs
 
-### CSRF verification failed
+### React-select
 
-An error that contiuously popped up during development was this:
+One big hurdle in this project was getting the react-select box to work as I intended. There are several different types of select boxes in react-select (Select, AsyncSelect, AsyncCreatableSelect etc.). I opted for the simplest one named Select.
 
-```
-Forbidden (403) CSRF verification failed. Request aborted.
-```
-
-Django requires CSRF-tokens (Cross Site Request Forgery) in their forms as a security measure to safely handle requests. Read more on CSRF [here](https://docs.djangoproject.com/en/4.1/ref/csrf/).
-In the django settings.py-file you need to explicitly state trusted origins for unsafe requests (e.g POST).
-In local development my URL changed day by day (e.g. https://8000-johneriksson88-ekorren-us6khvjs3ar.ws-eu83.gitpod.io/), and when testing my forms and submitting, I was presented with the error above. I soon learned that i had to change the CSRF_TRUSTED_ORIGINS settings variable as my URL changed.
-
-### Database server bugs
-
-The database is hosted by [ElephantSQL](https://customer.elephantsql.com/). Towards the projects end i started getting this error:
+The react-select box expects the options as key-value pairs with a label and a value variable, in an object. I had to extract the mood name for label and id for value in the fetch function and set all moods as moodOptions in state:
 
 ```
-OperationalError at /login/
-connection to server at "mouse.db.elephantsql.com" (13.49.141.18), port 5432 failed: FATAL:  too many connections for role "database_name"
+const fetchMoods = async () => {
+      try {
+        const { data } = await axiosReq.get("/moods/");
+        const moodNames = data.map((mood) => ({
+          label: mood.name,
+          value: mood.id,
+        }));
+        setMoodOptions(moodNames);
+        ...
+      }
+      }
 ```
 
-After some googling i learned that the free plan on ElephanSQL is to have a maximum of 5 open connections at the same time on their free plan. Looking at the [Django documentation](https://docs.djangoproject.com/en/2.1/ref/databases/#persistent-connections) on persistent connections i learned that i could time out the connections after a set amount of time.
-I added the CONN_MAX_AGE setting to the database settings in setting.py like this:
+Now I could put the moodOptions state in the options prop of the Select component.
+But to send back the data of the new post I only needed the moods IDs, since the Post model only takes the mood ID as a foreign key. So I created a function to handle the selected moods and put the value(ID) into the postData state, which was then sent to the API:
 
 ```
-DATABASES = {
-    'default': {
-        'HOST': dj_database_url.parse(os.environ.get('DATABASE_URL')),
-        'CONN_MAX_AGE': 0
-    }
+const handleSelectedMoods = (event) => {
+    const chosenMoods = event?.map((mood) => mood.value);
+    setPostData({
+      ...postData,
+      moods: chosenMoods,
+    });
+  };
+```
+
+All this might seem obvious to an experienced React developer, but to me it was quite a challenge and took alot of figuring out before I got it right. There were no direct googlable solutions to this, and I had to figure it out on my own. I wanted to document it here for future reference if I or anyone reading this should come upon a similar problem with the react-select library.
+
+### Mood field validation
+
+All form fields validation, except moods, come from the Django REST API serializers. Some are custom written in the serializers, and some come inherently with the model type in the model (e.g. required fields).
+
+When testing the post form I realized I could create a post without moods. I went into the API and changed this field in the model to required=True(field must have a value), but to no avail. I realized that since the data was sent in an empty array ("[]"), the field was not empty, hence no validation was made.
+To get around this I had to create custom validation on the front end side instead:
+
+- In the handleSubmit function I wrote an if statement checking if the lenghth of the moods state (postData.moods) was 0, and set the custom error in state:
+
+```
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (moods.length === 0) {
+      setErrors({ moods: "Pick one or more moods." });
+      return;
+      }
+      ...
 }
 
 ```
 
-Setting CONN_MAX_AGE to 0 terminates the connections immediately, since there is no reason to keep them open after a request. This seems to have fixed the problem.
-
-In the future I am likely to change the database host to a paid service. This is a decision that the site owner will have to take.
-
-### Email SMTP server bugs
-
-When sending an email, either via the contact form on the landing page or making/deleting and order, I sometimes got the following error:
+- Under the react-select box I put a conditional checking if there were any mood errors:
 
 ```
-Error: SMTP Sender Refused
-(530, b'5.7.0 Authentication Required)
+    {errors.moods ? <Alert variant="warning">{errors.moods}</Alert> : <></>}
 ```
 
-After googling the error this seemed to be caused on the server side of the [Mailtrap](https://mailtrap.io/) SMTP server i use. I have not found the exact cause of this bug since i can't reproduce it. I found that going into Mailtrap and resetting the credentials for the API made the error go away. I will put a pin in this error since I feel that I have no control over it and that it may come back. Changing to another SMTP service could solve the problem.
+It's this type of custom logic and problem solving that has been the most challenging and rewarding to do during this project.
 
-In the future, I will change the email settings from the test server to a paid SMTP server plan that can send emails to other recipients than the test server. This is a decision that is on the site owners table, and I am waiting to implement it as soon as i get a go ahead from them.
+### Import errors
+
+After working on the post pasge for a while I suddenly got this error in the browser console:
+
+> react_router_dom_cjs_react_router_dom_min**WEBPACK*IMPORTED_MODULE_3***default(...) is not a function
+
+I had no idea what it meant and the error message didn't give me any direct lines in my code that looked wrong. The only hint I got was that it had something to do with the useParams hook from React.
+After googling the error i found [this](https://stackoverflow.com/questions/68098641/typeerror-react-webpack-imported-module-0-default-is-not-a-function-or-its-r) thread on Stack Overflow. The top answer suggested was this:
+
+> useState is not the default function from the 'react' package. Change:
+>
+> ```
+> import useState from 'react';
+> ```
+>
+> to
+>
+> ```
+> import { useState } from 'react';
+> ```
+>
+> You can leave off the curly braces only for the default function from a module/package.
+
+Since I had used the auto import function of my IDE I had no direct control over how the imports were written. Apparently it matters if you enclose the import in curly braces ('{}') or not when you import a single component/module. This took me deeper down the rabbit hole and I found [this](https://stackoverflow.com/a/36796281) answer to my question. In short, the answer explains that if you use curly braces around a single import, the module that exports has to have a named export, e.g. "export const A = 42". If you don't use curly braces, JavaScript expects the import to be a default export from the exporting module, e.g "export default 42". A JavaScript module can have many named export, but only one default export.
+
+After learning this, I added curly braces to the import,
+
+```
+import { useParams } from "react-router";
+```
+
+and the error was gone.
+This was an important lesson, because importing/exporting is a crucial part of JavaScript, and not least React.
 
 ## Credits
 
 ### Images & Icons
 
-[FOTOGRID](https://www.shutterstock.com/sv/g/fotogri)
+- All icons come from [Fontawesome](https://fontawesome.com/)
+- The heart in the logo comes from [Freepik](https://www.flaticon.com/free-icons/heart) at [flaticon.com](https://www.flaticon.com/)
 
-- The four images on the product cards
+### Honourable mentions
 
-#
-
-[r.classen](https://www.shutterstock.com/sv/g/rclassenlayouts)
-
-- Hero image
-
-#
-
-[Fontawesome](https://fontawesome.com/icons)
-
-- All icons apart from the acorn and the four icons in the "Why us" section
-
-#
-
-[Pixel Perfect](https://www.flaticon.com/authors/pixel-perfect)
-
-- Acorn in logo, flaticon and footer
-
-#
-
-[Freepik](https://www.flaticon.com/authors/freepik)
-
-- Calendar icon
-- Unloading truck icon
-- Open lock icon
-
-#
-
-[Good Ware](https://www.flaticon.com/authors/good-ware)
-
-- Security camera icon
-
-### Content
-
-**Text**
-
-- All text was written by me, John Eriksson, with inspiration and information from the original [Magasinet Ekorren website](https://www.forraduppsala.se/).
-
-#
-
-[Google maps](https://www.google.com/maps)
-
-- Embedded map
-
-**Log in page and register page**
-
-- The design was derived from Youtuber [Dennis Ivy](https://www.youtube.com/c/DennisIvy?app=desktop)s tutorial on [Django user registration](https://www.youtube.com/watch?v=tUqUdu0Sjyc&t=694s&ab_channel=DennisIvy).
-
-**Cookie alert**
-
-- The cookie alert was derived from GitHub user [Wruczek](https://github.com/Wruczek/)s [Bootstrap Cookie Alert](https://github.com/Wruczek/Bootstrap-Cookie-Alert/).
-
-#
-
-### Honorable mentions
-
-- [Dennis Ivys](https://www.youtube.com/c/DennisIvy?app=desktop) Youtube series on Django helped immensely with different aspects of Django.
-- [Code Institutes](https://codeinstitute.net/se/full-stack-software-development-diploma/) courses were crucial in introducing me to all involved programming concepts used in this project. Their Tutor Support team also helped me countless times when I felt i had nowhere to go.
-- [Code With Steins](https://www.youtube.com/@CodeWithStein) Youtube channel helped me further my Django abilities, especially with the send_mail functions.
-- [Stack Overflow](https://stackoverflow.com/) is a forum for all things programming and I cant count how many threads I've browsed as soon as an error, bug or other question has come up.
-- [Django forum](https://forum.djangoproject.com/) is another great source for chasing down bugs or errors while exploring Django.
-- [The original Magasinet Ekorren website](https://www.forraduppsala.se/) was the source for most of the content, information about storage units, prices etc. The website is in Swedish.
-- My lovely wife Helena, for giving me pep talks and taking care of our two young boys while I was hammering away on the computer.
-
-## My thoughts
-
-As this was my first time working with Django, the whole project was a learning process. There are some parts that I could improve on, and I'm sure I will in the future as I finish the course. The nature of having a deadline between home and work life put time constraints on the project that i simply couldn't control. I am happy with the result and it works as intended.
-
-Working with Django is for me a double edged sword. I love the "batteries included" part of Django, which keeps me from having to "invent the wheel" over and over again. For example the User model together with the auth library for log in, registration etc. was a breeze to work with.
-On the other hand, I feel that there's so much happening under the hood that I have no idea how they work. It's almost like magic. For example, the database felt like some kind of mystical being just existing and working in the background. It wasn't until i had some problems with it I had to dive in under the hood to see what was happening.
-
-To summarize, Django is a very handy tool for quickly creating fully working applications, but many of aspects of it are kind of out of the developers control. That said, I can't imagine doing the same project without a framework like Django.
+- [Stackoverflow](https://stackoverflow.com/) for having the answers to many of my questions
+- Code Institute for providing the base upon which I built my project
+- My lovely wife for always supporting me
+- My sweet mother in law for taking care of my children so that I could do this

@@ -165,7 +165,7 @@ const Post = (props) => {
             </OverlayTrigger>
           )}
           {likes_count}
-          <Link to={`/posts/${id}`}>
+          <Link to={`/posts/${id}`} title="comments">
             <i className="far fa-comments" />
           </Link>
           {comments_count}

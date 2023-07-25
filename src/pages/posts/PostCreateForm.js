@@ -51,6 +51,7 @@ function PostCreateForm() {
       moods: chosenMoods,
     });
   };
+
   const [postData, setPostData] = useState({
     title: "",
     artist: "",
