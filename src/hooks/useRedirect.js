@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 export const useRedirect = (userAuthStatus) => {
   const history = useHistory();
 
+  // async function to fetch refresh token on mount
   useEffect(() => {
     const handleMount = async () => {
       try {

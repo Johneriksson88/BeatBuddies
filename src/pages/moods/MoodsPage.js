@@ -9,8 +9,10 @@ import btnStyles from "../../styles/Button.module.css";
 
 function MoodsPage() {
   const [moods, setMoods] = useState([]);
+  // hasLoaded state to show/hide the loading spinner
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  // fetch all moods
   useEffect(() => {
     const fetchMoods = async () => {
       try {

@@ -17,6 +17,8 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Select from "react-select";
 import Asset from "../../components/Asset";
 
+// comments in PostCreateForm applies to this file also
+
 function PostEditForm() {
   const [errors, setErrors] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);

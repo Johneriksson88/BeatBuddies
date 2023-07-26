@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+// custom function to close the hamburger menu if the user clicks outside it
 const useClickOutsideToggle = () => {
   const [expanded, setExpanded] = useState(false);
   const ref = useRef(null);

@@ -19,8 +19,10 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
 const ProfileEditForm = () => {
+  // get current user from CurrentUserContext
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  // get profile id from URL
   const { id } = useParams();
   const history = useHistory();
   const imageFile = useRef();
@@ -30,10 +32,10 @@ const ProfileEditForm = () => {
     content: "",
     image: "",
   });
+  // destructure form data into single variables
   const { name, content, image } = profileData;
-
   const [errors, setErrors] = useState({});
-
+  // fetch profile and redirect if current user is not profile owner
   useEffect(() => {
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
@@ -53,6 +55,7 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
+  // updates form data state as user types
   const handleChange = (event) => {
     setProfileData({
       ...profileData,
@@ -60,12 +63,14 @@ const ProfileEditForm = () => {
     });
   };
 
+  // submit form to API
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
     formData.append("content", content);
 
+    // post previous profile picture if it was not changed
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
     }

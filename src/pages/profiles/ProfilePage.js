@@ -29,16 +29,17 @@ import { ProfileEditDropdown } from "../../components/MoreDropdown";
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
-
+  // get current user from CurrentUserContext
   const currentUser = useCurrentUser();
+  // get id from the URl to show the correct profile
   const { id } = useParams();
 
   const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
-
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
 
+  // fetch profile along with the profile owners posts
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,7 +63,6 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-
       <Row noGutters className="px-3 text-center">
         {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
         <Col lg={3} className="text-lg-left">

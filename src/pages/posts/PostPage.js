@@ -19,6 +19,7 @@ import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 
 function PostPage() {
+  // useParams hook to store the id from the URL in state
   const { id } = useParams();
   const [post, setPost] = useState({ results: [] });
 
@@ -26,6 +27,7 @@ function PostPage() {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
 
+  // fetch post along with comments
   useEffect(() => {
     const handleMount = async () => {
       try {

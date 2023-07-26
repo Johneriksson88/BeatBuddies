@@ -7,6 +7,7 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 
 
 function CommentEditForm(props) {
+  // destructure props into single variables
   const { id, content, setShowEditForm, setComments } = props;
 
   const [formContent, setFormContent] = useState(content);
@@ -15,6 +16,7 @@ function CommentEditForm(props) {
     setFormContent(event.target.value);
   };
 
+  // submit function for the form
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

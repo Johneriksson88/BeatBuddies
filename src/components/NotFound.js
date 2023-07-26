@@ -3,6 +3,8 @@ import NoResults from "../assets/no-results.png";
 import styles from "../styles/NotFound.module.css";
 import Asset from "./Asset";
 
+// NotFound is shown when the user visits an invalid URL
+
 const NotFound = () => {
   return (
     <div className={styles.NotFound}>

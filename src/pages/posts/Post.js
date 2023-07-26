@@ -12,6 +12,7 @@ import { MoreDropdown } from "../../components/MoreDropdown";
 import Asset from "../../components/Asset";
 
 const Post = (props) => {
+  // destructure props into single variables
   const {
     id,
     owner,
@@ -34,12 +35,14 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+  // moodsObj state holds the full mood object (to access the mood name) since post.moods only holds the mood id
   const [moodsObj, setMoodsObj] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        // fetch all the moods related to the post
         const moodResults = await Promise.all(
           moods.map((mood) => axiosReq.get(`/moods/${mood}`))
         );
@@ -52,10 +55,11 @@ const Post = (props) => {
     fetchPosts();
   }, [id, moods]);
 
+  // redirects the user to edit post page
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
-
+  // deletes post and redirects the user back
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/posts/${id}/`);
@@ -64,6 +68,8 @@ const Post = (props) => {
       //console.log(err);
     }
   };
+
+  // post a like and increment likes count
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post("/likes/", { post: id });
@@ -79,7 +85,7 @@ const Post = (props) => {
       //console.log(err);
     }
   };
-
+  // remove the current users like and decrement likes count
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);

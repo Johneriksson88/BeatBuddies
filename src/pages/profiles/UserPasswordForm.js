@@ -16,7 +16,9 @@ import appStyles from "../../App.module.css";
 
 const UserPasswordForm = () => {
   const history = useHistory();
+  // get the id from the URL
   const { id } = useParams();
+  // get current user
   const currentUser = useCurrentUser();
 
   const [userData, setUserData] = useState({
@@ -27,6 +29,7 @@ const UserPasswordForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  // update form data state as the user types
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -41,6 +44,7 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // submit form data and redirect the user back
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

@@ -17,8 +17,10 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  // expands/closes the hamburger menu when user clicks outside
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+  // signs out user and sets current user to null in CurrentUserContext
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -38,6 +40,7 @@ const NavBar = () => {
     </NavLink>
   );
 
+  // icons shown to a logged in user
   const loggedInIcons = (
     <>
       <NavLink
@@ -72,6 +75,8 @@ const NavBar = () => {
       </NavLink>
     </>
   );
+
+  // icons shown to a logged out user
   const loggedOutIcons = (
     <>
       <NavLink

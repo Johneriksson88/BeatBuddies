@@ -22,15 +22,20 @@ import { useRedirect } from "../../hooks/useRedirect";
 import Select from "react-select";
 
 function PostCreateForm() {
+  // redirects user if logged out
   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
+  // state for storing the options loaded in the select box
   const [moodOptions, setMoodOptions] = useState([]);
+  // state for showing/hiding the loading spinner
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  // fetch the moods to be able to display the mood options
   useEffect(() => {
     const fetchMoods = async () => {
       try {
         const { data } = await axiosReq.get("/moods/");
+        // set the mood name and id as key value pair, the react-select component expects the options in this format
         const moodNames = data.map((mood) => ({
           label: mood.name,
           value: mood.id,
@@ -44,6 +49,7 @@ function PostCreateForm() {
     fetchMoods();
   }, []);
 
+  // update the moods state when user selects mood in select box
   const handleSelectedMoods = (event) => {
     const chosenMoods = event?.map((mood) => mood.value);
     setPostData({
@@ -51,7 +57,7 @@ function PostCreateForm() {
       moods: chosenMoods,
     });
   };
-
+  // set form data in state
   const [postData, setPostData] = useState({
     title: "",
     artist: "",
@@ -61,11 +67,13 @@ function PostCreateForm() {
     content: "",
     image: "",
   });
+  // destructure post data into single variables
   const { title, artist, song, link, moods, content, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
 
+  // update form data state as the user types
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -73,6 +81,7 @@ function PostCreateForm() {
     });
   };
 
+  // creates URL for uploaded image and sets image state
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -83,9 +92,10 @@ function PostCreateForm() {
     }
   };
 
+  // submit the form to API
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Custom validation of moods
+    // Custom validation of moods - cannot be empty
     if (moods.length === 0) {
       setErrors({ moods: "Pick one or more moods." });
       return;

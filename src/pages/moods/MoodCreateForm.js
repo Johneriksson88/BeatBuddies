@@ -17,7 +17,9 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function MoodCreateForm() {
+  // redirect not logged in users
   useRedirect("loggedOut");
+
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     name: "",
@@ -25,6 +27,7 @@ function MoodCreateForm() {
   const { name } = postData;
   const history = useHistory();
 
+  // submit form and redirect to moods page
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -40,6 +43,7 @@ function MoodCreateForm() {
     }
   };
 
+  // update postData as the user types
   const handleChange = (event) => {
     setPostData({
       ...postData,

@@ -8,10 +8,16 @@ import PopularProfiles from "../profiles/PopularProfiles";
 import appStyles from "../../App.module.css";
 
 function MoodPage() {
+  // get the id from the url to show the correct mood
   const { id } = useParams();
   const [mood, setMood] = useState({});
+  // posts state to allow the posts related to the mood to appear on the mood page
   const [posts, setPosts] = useState([]);
+
+  // hasLoaded state to show/hide the loading spinner
   const [hasLoaded, setHasLoaded] = useState(false);
+
+  // fetch the mood of the id in the useParams hook
   useEffect(() => {
     const fetchMood = async () => {
       try {

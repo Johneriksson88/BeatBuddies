@@ -22,13 +22,16 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
+  // useLocation stores the URL in pathname to use as dependency in the useState hook
   const { pathname } = useLocation();
   const currentUser = useCurrentUser();
   const [query, setQuery] = useState("");
 
+  // fetch posts
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        // fetch all posts or posts matching the search query if it exists
         const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
         setPosts(data);
         setHasLoaded(true);
@@ -37,6 +40,7 @@ function PostsPage({ message, filter = "" }) {
       }
     };
 
+    // timer prevents the page from stuttering when a user types
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();

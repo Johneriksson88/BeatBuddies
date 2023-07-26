@@ -7,17 +7,22 @@ import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import btnStyles from "../../styles/Button.module.css";
 
 function ContactForm() {
+  // redirect user if logged out
   useRedirect("loggedOut");
+  // state for showing/hiding the alert message on successful submit
   const [showAlert, setShowAlert] = useState(false);
   const [errors, setErrors] = useState({});
+  // set state for form data
   const [postData, setPostData] = useState({
     title: "",
     email: "",
     message: "",
   });
+  // destructure form data into single variables
   const { title, email, message } = postData;
   const history = useHistory();
 
+  // timer function that closes the alert message after 4 secs and redirects the user back after
   useEffect(() => {
     if (showAlert) {
       const timer = setTimeout(() => {
@@ -26,8 +31,10 @@ function ContactForm() {
       }, 4000);
       return () => clearTimeout(timer);
     }
+    // this useffect runs when the showAlert state updates
   }, [showAlert, history]);
 
+  // sets the post data state as the user types
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -35,6 +42,7 @@ function ContactForm() {
     });
   };
 
+  // submit function for the form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -44,6 +52,7 @@ function ContactForm() {
     formData.append("message", message);
     try {
       await axiosReq.post("/contact/", formData);
+      // changes showAlert state to show the sucess message
       setShowAlert(true);
     } catch (err) {
       //console.log(err);

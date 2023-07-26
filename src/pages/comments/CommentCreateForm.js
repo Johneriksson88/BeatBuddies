@@ -9,13 +9,15 @@ import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 
 function CommentCreateForm(props) {
+  // destructure props into single variables
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
 
+  // update comment content state as the user types
   const handleChange = (event) => {
     setContent(event.target.value);
   };
-
+  // submit function for the form
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -23,10 +25,12 @@ function CommentCreateForm(props) {
         content,
         post,
       });
+      // update the comments of the post
       setComments((prevComments) => ({
         ...prevComments,
         results: [data, ...prevComments.results],
       }));
+      // increment comment count by 1
       setPost((prevPost) => ({
         results: [
           {

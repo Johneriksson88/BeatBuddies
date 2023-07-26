@@ -15,18 +15,22 @@ import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 
 const SignUpForm = () => {
+  // redirect user if logged in
   useRedirect("loggedIn");
+  // set state for form data
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
     password2: "",
   });
+  // destructure form data into single variables
   const { username, password1, password2 } = signUpData;
 
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
+  // update state as the user types
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -34,10 +38,14 @@ const SignUpForm = () => {
     });
   };
 
+  // submit function that runs on form submit
   const handleSubmit = async (event) => {
+    // prevent page from reloading
     event.preventDefault();
     try {
+      // post new user to API
       await axios.post("/dj-rest-auth/registration/", signUpData);
+      // sign in new user
       history.push("/signin");
     } catch (err) {
       setErrors(err.response?.data);
