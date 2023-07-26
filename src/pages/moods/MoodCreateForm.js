@@ -36,7 +36,6 @@ function MoodCreateForm() {
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
-        console.log("errors:", errors);
       }
     }
   };
@@ -46,7 +45,6 @@ function MoodCreateForm() {
       ...postData,
       [event.target.name]: event.target.value,
     });
-    console.log(postData);
   };
 
   return (

@@ -130,7 +130,7 @@ const Post = (props) => {
           {hasLoaded ? (
             <>
               {moodsObj.map((mood) => (
-                <p key={mood} className={styles.moodTag}>
+                <p key={mood.id} className={styles.moodTag}>
                   {mood.name}
                 </p>
               ))}

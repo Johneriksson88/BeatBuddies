@@ -38,12 +38,8 @@ function MoodsPage() {
             {hasLoaded ? (
               <>
                 {moods.map((mood) => (
-                  <Link to={`/moods/${mood.id}`}>
-                    <Button
-                      size="lg"
-                      className={btnStyles.MoodButton}
-                      key={mood.id}
-                    >
+                  <Link to={`/moods/${mood.id}`} key={mood.id}>
+                    <Button size="lg" className={btnStyles.MoodButton}>
                       {mood.name}
                     </Button>
                   </Link>

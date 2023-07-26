@@ -42,6 +42,7 @@ The back end repository: https://github.com/Johneriksson88/bb-api
   - [Mood page](#mood-page)
   - [Sign out](#sign-out)
   - [Profile page](#profile-page)
+  - [Contact form](#contact-form)
 - [Components](#components)
   - [Asset](#asset)
   - [Avatar](#avatar)
@@ -171,6 +172,8 @@ The Issues page can be found [here](https://github.com/Johneriksson88/BeatBuddie
 
 34. **View specific mood** - As a user I can view an individual mood so that I can see what posts are related to that mood.
 
+35. As a user I can contact the site owner so that I can share thoughts or issues with the app.
+
 #
 
 ## Wireframes
@@ -226,7 +229,6 @@ There are some elements of pink (logo, buttons, active effects and mood tags on 
 To pick matching and accessible colors i used https://venngage.com/, which takes one colour and makes up an accessible colour palette based on that colour. I started with the pink colour (#d46488) of the logo. The tool tells you what text colour to use on the different background colours to maximise visibility for everyone.
 
 ![colour palette](src/assets/readme_images/colour_palette.png)
-
 
 #
 
@@ -329,6 +331,18 @@ The logo is described [here](#logo).
 - To the right of the username are a "three dots" icon, that shows a menu for editing profile, changing username and changing password.
 - Under the header the posts of the profile owner are shown.
 
+### Contact form
+
+- The contact form can be reached via the [contact button](#contact-button) component that is shown to a logged in user on the bottom right of all pages
+- The form has 3 fields:
+  - Email (optional)
+  - Title (optional)
+  - Message
+- The user can send feedback, bug reports or any other messages they want via the form
+- The messages are stored in the database for the admin, accessable through the Django Admin page
+
+#
+
 ## Components
 
 The BeatBuddies app contains several components. The use of components in React is a very clever way of having to write less code and keep the app more consistent. A component can be reused anywhere it's needed. For example the Post component is the most reused one being used in five pages!
@@ -338,14 +352,18 @@ Although there is a folder called "components" in the src directory, these are n
 ### Asset
 
 - The Asset component is a good example of a dynamic reusable component. It takes three different props (spinner, src, message) and for example displays the loading spinner icon if passed the "spinner" prop, or an image if passed the "src" prop.
-
 - It is used almost everywhere where an API call is made and is shown to the user to indicate that the information is being loaded.
 
 ### Avatar
 
 - The Avatar component is used everywhere a profile picture is shown, for example along with the usernames in the PopularProfiles component.
-
 - The image size can be passed as a prop, making it usable in all formats.
+
+### Contact button
+
+- The contact button is the component that shows on the bottom right of all pages for a logged in user
+- It leads to the [contact form](#contact-form) where users can send a message to the site owner
+- Is is semantically a sticky footer, which is partly true since it always shows on the bottom of the page, only that it's narrower than a full width footer
 
 ### MoreDropDown
 
@@ -412,18 +430,15 @@ All forms are validated via the back-end, except for the select box in the post 
 
 - Search moods
 - Create mood directly in the create post form
-- Sucess messages, e.g. "Post successfully created!"
 - Popular moods component
 - Delete/edit moods
-- Reposting of others posts
-- Autocomplete of adding songs through e.g. the Spotify or YouTube API. This would also automatically fill the "link" field of the post.
+- Reposting of others posts / share button
+- Autocomplete of adding songs through e.g. the Spotify or YouTube API. This would also automatically fill the link, artist and song fields of the post.
 - Faster database hosting
 
 #
 
 ## Technology
-
-This section covers all technology components and choices.
 
 ### Programming languages
 
@@ -623,6 +638,14 @@ Additional tests done:
 | 33     | As a **user** I can **view all moods** so that I can **see what moods are available**                 | Go to the moods page and ensure the moods are shown there                                                                                                                                               | PASS :white_check_mark: |
 | 34     | As a **user** I can view an individual mood so that I can **see what posts are related to that mood** | <ul><li>Go to moods page and click on any mood</li><li>Ensure the posts related to the mood appear under the header, and that the number of posts corresponds to the post count in the header</li></ul> | PASS :white_check_mark: |
 
+### Contact
+
+#### User Stories [#35](https://github.com/Johneriksson88/BeatBuddies/issues/35) |
+
+| Test # | User story                                                                                              | Test                                                                                    | Result                  |
+| ------ | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------- |
+| 35     | As a **user** I can **contact the site owner** so that I can **share thoughts or issues with the app**. | As a logged in user, fill the contact form, submit and ensure the success message shows | PASS :white_check_mark: |
+
 ## **Lighthouse Testing**
 
 ![Lighthouse Test Result Image](src/assets/readme_images/lighthouse_test.png)
@@ -717,7 +740,7 @@ It's this type of custom logic and problem solving that has been the most challe
 
 ### Import errors
 
-After working on the post pasge for a while I suddenly got this error in the browser console:
+After working on the post page for a while I suddenly got this error in the browser console:
 
 > react_router_dom_cjs_react_router_dom_min**WEBPACK*IMPORTED_MODULE_3***default(...) is not a function
 
@@ -761,5 +784,5 @@ This was an important lesson, because importing/exporting is a crucial part of J
 
 - [Stackoverflow](https://stackoverflow.com/) for having the answers to many of my questions
 - Code Institute for providing the base upon which I built my project
-- My lovely wife for always supporting me
+- My lovely wife for always supporting and believing in me
 - My sweet mother in law for taking care of my children so that I could do this

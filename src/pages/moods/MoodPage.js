@@ -31,7 +31,6 @@ function MoodPage() {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <Container className={appStyles.Content}>
           <Row noGutters className="px-3 d-flex justify-content-center">
-          
             <Col lg={6} className="text-center">
               <h3 className="m-2">{mood.name}</h3>
               <hr></hr>
@@ -43,13 +42,12 @@ function MoodPage() {
               </Row>
             </Col>
 
-            
             <hr></hr>
           </Row>
           {hasLoaded ? (
             <Col>
               {posts.map((post) => (
-                <Post key={post} {...post} setPosts={setPosts} />
+                <Post key={post.id} {...post} setPosts={setPosts} />
               ))}
             </Col>
           ) : (

@@ -18,6 +18,8 @@ import NotFound from "./components/NotFound";
 import MoodsPage from "./pages/moods/MoodsPage";
 import MoodPage from "./pages/moods/MoodPage";
 import MoodCreateForm from "./pages/moods/MoodCreateForm";
+import ContactButton from "./components/ContactButton";
+import ContactForm from "./pages/contact/ContactForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -85,9 +87,11 @@ function App() {
             path="/profiles/:id/edit"
             render={() => <ProfileEditForm />}
           />
+          <Route exact path="/contact" render={() => <ContactForm />} />
           <Route render={() => <NotFound />} />
         </Switch>
       </Container>
+      {currentUser && <ContactButton />}
     </div>
   );
 }

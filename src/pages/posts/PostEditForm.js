@@ -21,7 +21,6 @@ function PostEditForm() {
   const [errors, setErrors] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [moodOptions, setMoodOptions] = useState([]);
-  const [previousMoods, setPreviousMoods] = useState([]);
   const [postData, setPostData] = useState({
     title: "",
     artist: "",
@@ -46,10 +45,6 @@ function PostEditForm() {
           value: mood.id,
         }));
         setMoodOptions(moodNames);
-        /* const previousChosenMoods =  moodNames.filter(function (mood) {
-          return mood.value == ???????
-        })
-        setPreviousMoods() */
         setHasLoaded(true);
       } catch (err) {
         //console.log(err);
@@ -188,7 +183,6 @@ function PostEditForm() {
                 options={moodOptions}
                 placeholder="Select one or more moods"
                 onChange={handleSelectedMoods}
-                defaultValue={moods.map((mood) => mood)}
               />
             )}
           </>
