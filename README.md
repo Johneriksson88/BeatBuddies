@@ -172,7 +172,7 @@ The Issues page can be found [here](https://github.com/Johneriksson88/BeatBuddie
 
 34. **View specific mood** - As a user I can view an individual mood so that I can see what posts are related to that mood.
 
-35. As a user I can contact the site owner so that I can share thoughts or issues with the app.
+35. **Contact form** - As a user I can contact the site owner so that I can share thoughts or issues with the app.
 
 #
 
@@ -771,6 +771,20 @@ import { useParams } from "react-router";
 
 and the error was gone.
 This was an important lesson, because importing/exporting is a crucial part of JavaScript, and not least React.
+
+### Favicon
+
+After experimenting with icons I found the right one. I changed the favicon in the public folder where React looks for the 'favicon.ico' file. In development that worked fine, but after deploying I noticed that the favicon was not changed in my browser on the live app.
+I found [this](https://stackoverflow.com/questions/51994375/favicon-in-react-will-not-update) thread on [Stack Overflow](https://stackoverflow.com/) and found my answer.
+Apparently, the favicon is cached on the client side and will not change that easily. This was the answer that fixed it:
+
+> The problem is that the browser is holding onto the old image in the cache and not updating it.
+>
+> To solve this problem update the favicon url to %PUBLIC_URL%/favicon.ico?v=2
+>
+> The ?v=2 at the end will force the browser to refresh the favicon.
+
+I made the changes and the favicon updated in my browser.
 
 ## Credits
 
