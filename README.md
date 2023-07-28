@@ -435,6 +435,7 @@ All forms are validated via the back-end, except for the select box in the post 
 - Reposting of others posts / share button
 - Autocomplete of adding songs through e.g. the Spotify or YouTube API. This would also automatically fill the link, artist and song fields of the post.
 - Faster database hosting
+- App working on all devices
 
 #
 
@@ -542,7 +543,22 @@ The [W3C CSS Validator Service](https://jigsaw.w3.org/css-validator/) was used t
 
 The site was tested manually across a range of devices to ensure all links and styling work correctly and to ensure responsiveness. All features on the page were tested, especially the form validation, to ensure user feedback worked properly and no faulty or empty inputs could be made.
 
-Testing was carried out on multiple browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, Safari and Opera. Devices tested on were Apple iPhone 12, Apple iPhone 13, Huawei P20, iPad Mini and Windows 10 Desktops.
+Testing was sucessfully carried out on desktop (Windows 10 Pro) in the following browsers:
+
+- Google Chrome version 115.0.5790.110
+- Microsoft Edge version 115.0.1901.183
+- Mozilla Firefox version 115.0.3
+
+Testing on mobile phone did not work out as expected. As of now the app is not guaranteed to work on mobile phones. The following issues were presented with the respective devices:
+
+- Google Chrome on iPhone 13 with iOS 16.6
+  - The home page loads with the content appearing (posts, popular profiles) on the home page, but when trying to log in I get redirected back to the login page.
+  - From what I've been managed to google, this is a CORS issue, although I have cross-origin enabled in the back end.
+  - I went in to the Chrome settings on the iPhone and enabled cross-origin website tracking, but to no avail.
+- Brave browser on OnePlus Nord with Android 12
+  - All features work, but nothing happens when clicking "New mood" button.
+
+All in all, I intend for the app to work on all devices, but due to time constraints I chose not to dive further into this at this point. This is a problem I intend to fix in the future.
 
 ## User Story Testing
 
@@ -673,6 +689,10 @@ A further test was ran using the [Web Accessibility Evaluation Tool](https://wav
 #
 
 ## Bugs
+
+### App not working on all mobile devices
+
+See [testing section](#manual-testing).
 
 ### React-select
 
